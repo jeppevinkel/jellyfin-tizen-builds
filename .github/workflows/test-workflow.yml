@@ -20,7 +20,7 @@ jobs:
         uses: haya14busa/action-cond@v1
         id: label
         with:
-          cond: ${{ github.event.client_payload.release_label }}
+          cond: ${{ github.event.client_payload.release_label != 0 }}
           if_true: ${{ github.event.client_payload.release_label }}
           if_false: ${{ steps.date.outputs.date }}
       
