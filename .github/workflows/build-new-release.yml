@@ -24,30 +24,33 @@ jobs:
         with:
           node-version: '>=14'
     
-      - name: Clone jellyfin-tizen
-        uses: sudosubin/git-clone-action@v1.0.1
-        with:
-          repository: 'jellyfin/jellyfin-tizen'
-          platform: 'github'
-          path: 'jellyfin-tizen'
+#       - name: Clone jellyfin-tizen
+#         uses: sudosubin/git-clone-action@v1.0.1
+#         with:
+#           repository: 'jellyfin/jellyfin-tizen'
+#           platform: 'github'
+#           path: 'jellyfin-tizen'
           
-      - name: Clone jellyfin-web
-        uses: sudosubin/git-clone-action@v1.0.1
-        with:
-          repository: 'jellyfin/jellyfin-web'
-          platform: 'github'
-          path: 'jellyfin-web'
+#       - name: Clone jellyfin-web
+#         uses: sudosubin/git-clone-action@v1.0.1
+#         with:
+#           repository: 'jellyfin/jellyfin-web'
+#           platform: 'github'
+#           path: 'jellyfin-web'
           
-      - name: Build jellyfin-web
+#       - name: Build jellyfin-web
+#         run: |
+#           cd jellyfin-web
+#           npm ci --no-audit
+          
+#       - name: Build jellyfin-tizen
+#         run: |
+#           cd jellyfin-tizen
+#           npm ci --no-audit
+          
+      - name: Download Tizen-Studio
         run: |
-          cd jellyfin-web
-          npm ci --no-audit
-          cd ..
-          
-      - name: Build jellyfin-tizen
-        run: |
-          cd jellyfin-tizen
-          npm ci --no-audit
+          curl –o tizen-installer https://download.tizen.org/sdk/Installer/tizen-studio_TIZEN_STUDIO_VER/web-cli_Tizen_Studio_TIZEN_STUDIO_VER_ubuntu-64.bin
 
       - name: Check resulting folders
         run: |
