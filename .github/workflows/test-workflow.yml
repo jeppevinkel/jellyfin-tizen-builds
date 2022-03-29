@@ -25,4 +25,4 @@ jobs:
           if_false: ${{ steps.date.outputs.date }}
       
       - name: Print Final Label
-        run: echo ${{ sets.label.outputs.value }}
+        run: echo ${{ steps.label.outputs.value }}
