@@ -78,7 +78,7 @@ jobs:
           ../tizen-studio/tools/ide/bin/tizen package -t wgt -o . -s Jellyfin -- .buildResult
           
       - name: Print logs
-        if: steps.wgt.outcome != 'success'
+        if: always()
         run: cat ./tizen-studio-data/cli/logs/cli.log
           
       - name: Release Build Result
