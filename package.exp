@@ -4,7 +4,7 @@ set timeout -1
 
 cd jellyfin-tizen
 
-spawn ../tizen-studio/tools/ide/bin/tizen package -t wgt -o /output/ -s Jellyfin -- .buildResult
+spawn ../tizen-studio/tools/ide/bin/tizen package -t wgt -o . -s Jellyfin -- .buildResult
 
 expect "Author password:"
 
