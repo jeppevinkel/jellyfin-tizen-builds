@@ -98,9 +98,12 @@ jobs:
       - name: Print logs
         if: always()
         run: cat ./tizen-studio-data/cli/logs/cli.log
+        
+      - name: List All Files
+        run: ls -R
           
       - name: Release Build Result
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.date.outputs.date }}
-          files: ./jellyfin-tizen/Jellyfin.wgt
+          files: jellyfin-tizen/Jellyfin.wgt
