@@ -17,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: env
+    
       - name: Clone jellyfin-tizen
         uses: sudosubin/git-clone-action@v1.0.1
         with:
