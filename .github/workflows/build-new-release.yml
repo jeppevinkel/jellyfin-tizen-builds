@@ -96,6 +96,6 @@ jobs:
         run: cat ./tizen-studio-data/cli/logs/cli.log
           
       - name: Release Build Result
-        uses: yakuhzi/release-asset@v1.2.3
+        uses: softprops/action-gh-release@v1
         with:
-          file: ./jellyfin-tizen/Jellyfin.wgt
+          files: ./jellyfin-tizen/Jellyfin.wgt
