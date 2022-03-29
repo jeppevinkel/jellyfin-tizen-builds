@@ -18,18 +18,23 @@ jobs:
 
     steps:
       - run: env
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: '>=14'
     
       - name: Clone jellyfin-tizen
         uses: sudosubin/git-clone-action@v1.0.1
         with:
-          repository: jellyfin/jellyfin-tizen
-          platform: github
+          repository: 'jellyfin/jellyfin-tizen'
+          platform: 'github'
           
       - name: Clone jellyfin-web
         uses: sudosubin/git-clone-action@v1.0.1
         with:
-          repository: jellyfin/jellyfin-web
-          platform: github
+          repository: 'jellyfin/jellyfin-web'
+          platform: 'github'
           
       - name: Build jellyfin-web
         run: |
