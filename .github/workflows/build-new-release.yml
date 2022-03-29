@@ -71,10 +71,15 @@ jobs:
           chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
 
       - name: Build WGT
+        id: wgt
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           ../tizen-studio/tools/ide/bin/tizen package -t wgt -o . -s Jellyfin -- .buildResult
+          
+      - name: Print logs
+        if: steps.wgt.outcome != 'success'
+        run: cat ./tizen-studio-data/cli/logs/cli.log
           
       - name: Release Build Result
         uses: yakuhzi/release-asset@v1.2.3
