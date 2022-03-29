@@ -52,6 +52,12 @@ jobs:
         run: |
           curl –o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
 
+      - name: Install Tizen-Studio
+        run: |
+          ./tizen-installer --accept-license /tizen-studio
+          rm ./tizen-installer
+          echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
+
       - name: Check resulting folders
         run: |
           ls
