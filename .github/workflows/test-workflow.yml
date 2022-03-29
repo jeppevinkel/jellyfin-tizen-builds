@@ -21,8 +21,8 @@ jobs:
         id: label
         with:
           cond: ${{ github.event.client_payload.release_label }}
-          if_true: github.event.client_payload.release_label
-          if_false: steps.date.outputs.date
+          if_true: ${{ github.event.client_payload.release_label }}
+          if_false: ${{ steps.date.outputs.date }}
       
       - name: Print Final Label
         run: echo ${{ sets.label.outputs.value }}
