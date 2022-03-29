@@ -29,12 +29,14 @@ jobs:
         with:
           repository: 'jellyfin/jellyfin-tizen'
           platform: 'github'
+          path: 'jellyfin-tizen'
           
       - name: Clone jellyfin-web
         uses: sudosubin/git-clone-action@v1.0.1
         with:
           repository: 'jellyfin/jellyfin-web'
           platform: 'github'
+          path: 'jellyfin-web'
           
       - name: Build jellyfin-web
         run: |
