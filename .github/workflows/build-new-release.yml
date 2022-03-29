@@ -24,29 +24,29 @@ jobs:
         with:
           node-version: '>=14'
     
-#       - name: Clone jellyfin-tizen
-#         uses: sudosubin/git-clone-action@v1.0.1
-#         with:
-#           repository: 'jellyfin/jellyfin-tizen'
-#           platform: 'github'
-#           path: 'jellyfin-tizen'
+      - name: Clone jellyfin-tizen
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-tizen'
+          platform: 'github'
+          path: 'jellyfin-tizen'
           
-#       - name: Clone jellyfin-web
-#         uses: sudosubin/git-clone-action@v1.0.1
-#         with:
-#           repository: 'jellyfin/jellyfin-web'
-#           platform: 'github'
-#           path: 'jellyfin-web'
+      - name: Clone jellyfin-web
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          platform: 'github'
+          path: 'jellyfin-web'
           
-#       - name: Build jellyfin-web
-#         run: |
-#           cd jellyfin-web
-#           npm ci --no-audit
+      - name: Build jellyfin-web
+        run: |
+          cd jellyfin-web
+          npm ci --no-audit
           
-#       - name: Build jellyfin-tizen
-#         run: |
-#           cd jellyfin-tizen
-#           npm ci --no-audit
+      - name: Build jellyfin-tizen
+        run: |
+          cd jellyfin-tizen
+          npm ci --no-audit
           
       - name: Download Tizen-Studio
         run: |
@@ -62,3 +62,22 @@ jobs:
       - name: Check resulting folders
         run: |
           ls
+          
+      - name: Prepare Tizen Certificate
+        run: |
+          ./tizen-studio/tools/ide/bin/tizen certificate -a Jellyfin -c NZ -s Aukland -ct Aukland -o Tizen -n Jellyfin -e jellyfin@example.org -f tizencert
+          ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.p12"
+          ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+          chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+
+      - name: Build WGT
+        run: |
+          cd jellyfin-tizen
+          ./tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          ./tizen-studio/tools/ide/bin/tizen package -t wgt -o . -s Jellyfin -- .buildResult
+          
+      - name: Release Build Result
+        uses: yakuhzi/release-asset@v1.2.3
+        with:
+          # File to upload to the release
+          file: ./jellyfin-tizen/.buildResult
