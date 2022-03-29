@@ -2,7 +2,7 @@ name: Build New Release
 
 on:
   repository_dispatch:
-    types: [build-new-release]
+    types: [build_new_release]
 
   workflow_dispatch:
 
