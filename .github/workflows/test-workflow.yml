@@ -9,5 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+    
       - name: Run a one-line script
         run: echo ${{ github.event.client_payload.release_label }}
+        
+      - name: Set Release Label
+        uses: haya14busa/action-cond@v1
+        id: label
+        with:
+          cond: ${{ github.event.client_payload.release_label }}
+          if_true: github.event.client_payload.release_label
+          if_false: steps.date.outputs.date
+      
+      - name: Print Final Label
+        run: echo ${{ sets.label.outputs.value }}
