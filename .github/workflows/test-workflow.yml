@@ -1,0 +1,13 @@
+name: Test Workflow
+
+on:
+  repository_dispatch:
+    types: [run_test_workflow]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: echo ${{ github.event.client_payload }}
