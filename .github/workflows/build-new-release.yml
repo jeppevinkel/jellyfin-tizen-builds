@@ -55,7 +55,7 @@ jobs:
       - name: Install Tizen-Studio
         run: |
           chmod +x tizen-installer
-          ./tizen-installer --accept-license /tizen-studio
+          ./tizen-installer --accept-license ./tizen-studio
           rm ./tizen-installer
           echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
 
