@@ -10,4 +10,4 @@ jobs:
 
     steps:
       - name: Run a one-line script
-        run: echo ${{ toJson(github.event.client_payload) }}
+        run: echo ${{ github.event.client_payload.release_label }}
