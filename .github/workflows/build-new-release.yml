@@ -5,16 +5,41 @@ on:
     types: [build_new_release]
 
   workflow_dispatch:
+  
+env:
+  JELLYFIN_WEB_DIR: ../jellyfin-web/dist
+  TIZEN_STUDIO_VER: 4.5.1
+  TIZEN_STUDIO_URL: https://download.tizen.org/sdk/Installer/tizen-studio_${{ env.TIZEN_STUDIO_VER }}/web-cli_Tizen_Studio_${{ env.TIZEN_STUDIO_VER }}_ubuntu-64.bin
+  TIZEN_STUDIO_FILE: web-cli_Tizen_Studio_${{ env.TIZEN_STUDIO_VER }}_ubuntu-64.bin
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a multi-line script
+      - name: Clone jellyfin-tizen
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: jellyfin/jellyfin-tizen
+          platform: github
+          
+      - name: Clone jellyfin-web
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: jellyfin/jellyfin-web
+          platform: github
+          
+      - name: Build jellyfin-web
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          cd jellyfin-web
+          npm ci --no-audit
+          cd ..
+          
+      - name: Build jellyfin-tizen
+        run: |
+          cd jellyfin-tizen
+          npm ci --no-audit
+
+      - name: Check resulting folders
+        run: |
+          ls
