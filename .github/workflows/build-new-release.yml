@@ -21,6 +21,10 @@ jobs:
       
       - name: 'Checkout'
         uses: actions/checkout@v1
+        
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.0.0
@@ -98,4 +102,5 @@ jobs:
       - name: Release Build Result
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.date.outputs.date }}
           files: ./jellyfin-tizen/Jellyfin.wgt
