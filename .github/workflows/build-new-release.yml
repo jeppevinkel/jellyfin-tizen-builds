@@ -38,6 +38,9 @@ jobs:
         with:
           node-version: '>=14'
           
+      - name: Install Yarn
+        run: npm install --global yarn
+          
       - name: Install Needed packages
         run: sudo apt install expect
       
