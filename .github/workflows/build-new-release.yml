@@ -107,12 +107,12 @@ jobs:
       - name: Build jellyfin-web
         run: |
           cd jellyfin-web
-          npm ci --no-audit
+          '(test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile'
           
       - name: Build jellyfin-web PreRelease
         run: |
           cd jellyfin-web-prerelease
-          npm ci --no-audit
+          '(test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile'
           
       - name: Build jellyfin-tizen Release
         run: |
