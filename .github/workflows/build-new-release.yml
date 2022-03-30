@@ -115,7 +115,7 @@ jobs:
       - name: Build jellyfin-web
         run: |
           cd jellyfin-web
-          '(test -f package-lock.json && npm ci --no-audit) || echo no dice'
+          (test -f package-lock.json && npm ci --no-audit) || echo no dice
           
 #       - name: Build jellyfin-web PreRelease
 #         run: |
