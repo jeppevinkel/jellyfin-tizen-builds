@@ -41,32 +41,32 @@ jobs:
       - name: Install Yarn
         run: npm install --global yarn
           
-#       - name: Install Needed packages
-#         run: sudo apt install expect
+      - name: Install Needed packages
+        run: sudo apt install expect
       
-#       - name: Download Tizen-Studio
-#         run: |
-#           curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
+      - name: Download Tizen-Studio
+        run: |
+          curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
 
-#       - name: Install Tizen-Studio
-#         run: |
-#           chmod +x tizen-installer
-#           ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
-#           rm ./tizen-installer
-#           echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
+      - name: Install Tizen-Studio
+        run: |
+          chmod +x tizen-installer
+          ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
+          rm ./tizen-installer
+          echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
           
-#       - name: Prepare Tizen Certificate
-#         run: |
-#           ./tizen-studio/tools/ide/bin/tizen certificate -a Jellyfin -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Jellyfin -e jellyfin@example.org -f tizencert
-#           ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.p12" -p 1234
-#           ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
-#           chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+      - name: Prepare Tizen Certificate
+        run: |
+          ./tizen-studio/tools/ide/bin/tizen certificate -a Jellyfin -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Jellyfin -e jellyfin@example.org -f tizencert
+          ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.p12" -p 1234
+          ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+          chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           
-#       - name: Prepare for password prompt
-#         run: |
-#           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-#           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-#           sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+      - name: Prepare for password prompt
+        run: |
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
         
       - name: Get Latest Jellyfin-web
         id: latest-web
@@ -76,20 +76,20 @@ jobs:
           repo: jellyfin-web
           excludes: prerelease, draft
         
-#       - name: Get Latest Jellyfin-web PreRelease
-#         id: latest-web-prereleasee
-#         uses: pozetroninc/github-action-get-latest-release@master
-#         with:
-#           owner: jellyfin
-#           repo: jellyfin-web
-#           excludes: release, draft
+      - name: Get Latest Jellyfin-web PreRelease
+        id: latest-web-prereleasee
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: jellyfin
+          repo: jellyfin-web
+          excludes: release, draft
     
-#       - name: Clone jellyfin-tizen
-#         uses: sudosubin/git-clone-action@v1.0.1
-#         with:
-#           repository: 'jellyfin/jellyfin-tizen'
-#           platform: 'github'
-#           path: 'jellyfin-tizen'
+      - name: Clone jellyfin-tizen
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-tizen'
+          platform: 'github'
+          path: 'jellyfin-tizen'
           
       - name: Clone jellyfin-web
         uses: sudosubin/git-clone-action@v1.0.1
@@ -99,70 +99,65 @@ jobs:
           path: 'jellyfin-web'
           ref: ${{ steps.latest-web.outputs.release }}
           
-#       - name: Clone jellyfin-web PreRelease
-#         uses: sudosubin/git-clone-action@v1.0.1
-#         with:
-#           repository: 'jellyfin/jellyfin-web'
-#           platform: 'github'
-#           path: 'jellyfin-web-prerelease'
-#           ref: ${{ steps.latest-web-prereleasee.outputs.release }}
-          
-#       - name: Build jellyfin-web
-#         run: |
-#           cd jellyfin-web
-#           '(test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile'
+      - name: Clone jellyfin-web PreRelease
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          platform: 'github'
+          path: 'jellyfin-web-prerelease'
+          ref: ${{ steps.latest-web-prereleasee.outputs.release }}
           
       - name: Build jellyfin-web
         run: |
           cd jellyfin-web
-          (test -f package-lock.json && npm ci --no-audit) || echo no dice
+          (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
           
-#       - name: Build jellyfin-web PreRelease
-#         run: |
-#           cd jellyfin-web-prerelease
-#           '(test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile'
+      - name: Build jellyfin-web PreRelease
+        run: |
+          cd jellyfin-web-prerelease
+          (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
           
-#       - name: Build jellyfin-tizen Release
-#         run: |
-#           cd jellyfin-tizen
-#           JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+      - name: Build jellyfin-tizen Release
+        run: |
+          cd jellyfin-tizen
+          JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
 
-#       - name: Build
-#         run: |
-#           cd jellyfin-tizen
-#           ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+      - name: Build
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
-#       - name: Build jellyfin-tizen PreRelease
-#         run: |
-#           cd jellyfin-tizen
-#           JELLYFIN_WEB_DIR=../jellyfin-web-prerelease/dist npm ci --no-audit
+      - name: Build jellyfin-tizen PreRelease
+        run: |
+          cd jellyfin-tizen
+          JELLYFIN_WEB_DIR=../jellyfin-web-prerelease/dist npm ci --no-audit
 
-#       - name: Build PreRelease
-#         run: |
-#           cd jellyfin-tizen
-#           ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+      - name: Build PreRelease
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
-#       - name: Package WGT
-#         run: |
-#           expect ./package.exp
+      - name: Package WGT
+        run: |
+          expect ./package.exp
           
-#       - name: Package WGT PreRelease
-#         run: |
-#           expect ./package-pre.exp
-#           mv ./jellyfin-tizen/prerelease/Jellyfin.wgt ./jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt 
+      - name: Package WGT PreRelease
+        run: |
+          expect ./package-pre.exp
+          mv ./jellyfin-tizen/prerelease/Jellyfin.wgt ./jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt 
           
-#       - name: Print logs
-#         if: always()
-#         run: cat ./tizen-studio-data/cli/logs/cli.log
+      - name: Print logs
+        if: always()
+        run: cat ./tizen-studio-data/cli/logs/cli.log
         
-#       - name: List All Files
-#         run: ls -R
+      - name: List All Files
+        run: ls -R
           
-#       - name: Release Build Result
-#         uses: softprops/action-gh-release@v1
-#         with:
-#           tag_name: ${{ steps.label.outputs.value }}
-#           files: |
-#             jellyfin-tizen/release/Jellyfin.wgt
-#             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
-#           body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})"
+      - name: Release Build Result
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.label.outputs.value }}
+          files: |
+            jellyfin-tizen/release/Jellyfin.wgt
+            jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
+          body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})"
