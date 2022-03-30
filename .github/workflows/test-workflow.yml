@@ -39,7 +39,6 @@ jobs:
           platform: 'github'
           path: 'jellyfin-web'
           ref: ${{ steps.latest-web.outputs.release }}
-          excludes: release, draft
           
       - name: Clone jellyfin-web PreRelease
         uses: sudosubin/git-clone-action@v1.0.1
@@ -49,7 +48,7 @@ jobs:
           path: 'jellyfin-web-prerelease'
           ref: ${{ steps.latest-web-prereleasee.outputs.release }}
           
-      - run: echo ls
+      - run: ls
         
       - name: Set Release Label
         uses: haya14busa/action-cond@v1
