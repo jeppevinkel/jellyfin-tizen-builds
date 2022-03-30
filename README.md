@@ -11,12 +11,10 @@ The purpose of this repository is to automatically build the most up-to-date ver
 
 ### Deploy to TV
 1. Activate Developer Mode on TV (https://developer.samsung.com/tv/develop/getting-started/using-sdk/tv-device).
-2. Connect to TV with Device Manager from Tizen Studio or with sdb.
-```bash
-sdb connect <your tv ip>
-```
-3. Install the package.
+2. Connect to TV with Device Manager from Tizen Studio. Typically located in `C:\tizen-studio\tools\device-manager\bin`
+3. Install the package.  
+   This command assumes the file you are installing is called `Jellyfin.wgt`. Simply change it to `Jellyfin-prerelease.wgt` if you are installing the prerelease version. Otherwise you can also just rename the file.
 ```bash
 tizen install -n Jellyfin.wgt -t <the name of your tv>
 ```
-> You can find your tv name in Device Manager from Tizen Studio or using `sdb devices`.
+> You can find your tv name in Device Manager from Tizen Studio or using `sdb devices`.  
