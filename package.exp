@@ -12,6 +12,6 @@ send -- "1234\r"
 
 expect "Yes: (Y), No: (N) ?"
 
-send -- "\r"
+send -- "N\r"
 
 expect eof
