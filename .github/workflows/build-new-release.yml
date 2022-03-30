@@ -61,12 +61,6 @@ jobs:
           ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.p12" -p 1234
           ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
-          
-      - name: Prepare for password prompt
-        run: |
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
         
       - name: Get Latest Jellyfin-web
         id: latest-web
@@ -130,6 +124,7 @@ jobs:
       - name: Build jellyfin-tizen PreRelease
         run: |
           cd jellyfin-tizen
+          rm -rf www
           JELLYFIN_WEB_DIR=../jellyfin-web-prerelease/dist npm ci --no-audit
 
       - name: Build PreRelease
@@ -137,10 +132,22 @@ jobs:
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
+      - name: Prepare for password prompt
+        run: |
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          
       - name: Package WGT
         run: |
           expect ./package.exp
           
+      - name: Prepare for password prompt
+        run: |
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+      
       - name: Package WGT PreRelease
         run: |
           expect ./package-pre.exp
@@ -151,6 +158,7 @@ jobs:
         run: cat ./tizen-studio-data/cli/logs/cli.log
         
       - name: List All Files
+        if: always()
         run: ls -R
           
       - name: Release Build Result
