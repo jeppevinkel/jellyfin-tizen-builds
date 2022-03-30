@@ -26,3 +26,8 @@ jobs:
       
       - name: Print Final Label
         run: echo ${{ steps.label.outputs.value }}
+        
+      - name: Print Release Info
+        run: |
+          echo ${{ github.event.client_payload.data.webRelease.name }}
+          echo ${{ github.event.client_payload.data.webPreRelease.name }}
