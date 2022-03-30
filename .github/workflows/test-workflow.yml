@@ -16,6 +16,41 @@ jobs:
       - name: Run a one-line script
         run: echo ${{ github.event.client_payload.release_label }}
         
+      - name: Get Latest Jellyfin-web
+        id: latest-web
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: jellyfin
+          repo: jellyfin-web
+          excludes: prerelease, draft
+        
+      - name: Get Latest Jellyfin-web PreRelease
+        id: latest-web-prereleasee
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: jellyfin
+          repo: jellyfin-web
+          excludes: release, draft
+          
+      - name: Clone jellyfin-web
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          platform: 'github'
+          path: 'jellyfin-web'
+          ref: ${{ steps.latest-web.outputs.release }}
+          excludes: release, draft
+          
+      - name: Clone jellyfin-web PreRelease
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          platform: 'github'
+          path: 'jellyfin-web-prerelease'
+          ref: ${{ steps.latest-web-prereleasee.outputs.release }}
+          
+      - run: echo ls
+        
       - name: Set Release Label
         uses: haya14busa/action-cond@v1
         id: label
