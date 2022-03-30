@@ -115,4 +115,4 @@ jobs:
         with:
           tag_name: ${{ steps.label.outputs.value }}
           files: jellyfin-tizen/Jellyfin.wgt
-          body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n# PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})"
+          body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})"
