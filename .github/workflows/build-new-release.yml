@@ -85,6 +85,13 @@ jobs:
           platform: 'github'
           path: 'jellyfin-tizen'
           
+      - name: Clone jellyfin-web Master
+        uses: sudosubin/git-clone-action@v1.0.1
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          platform: 'github'
+          path: 'jellyfin-web-master'
+          
       - name: Clone jellyfin-web
         uses: sudosubin/git-clone-action@v1.0.1
         with:
@@ -103,6 +110,11 @@ jobs:
           
       - name: Build jellyfin-web
         run: |
+          cd jellyfin-web-master
+          (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
+          
+      - name: Build jellyfin-web
+        run: |
           cd jellyfin-web
           (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
           
@@ -110,6 +122,16 @@ jobs:
         run: |
           cd jellyfin-web-prerelease
           (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
+          
+      - name: Build jellyfin-tizen Master
+        run: |
+          cd jellyfin-tizen
+          JELLYFIN_WEB_DIR=../jellyfin-web-master/dist npm ci --no-audit
+
+      - name: Build Master
+        run: |
+          cd jellyfin-tizen
+          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-master -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Build jellyfin-tizen Release
         run: |
@@ -131,6 +153,17 @@ jobs:
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          
+      - name: Prepare for password prompt
+        run: |
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+          
+      - name: Package WGT Master
+        run: |
+          expect ./package-master.exp
+          mv ./jellyfin-tizen/master/Jellyfin.wgt ./jellyfin-tizen/master/Jellyfin-master.wgt 
           
       - name: Prepare for password prompt
         run: |
@@ -168,4 +201,5 @@ jobs:
           files: |
             jellyfin-tizen/release/Jellyfin.wgt
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
-          body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})"
+            jellyfin-tizen/master/Jellyfin-master.wgt
+          body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
