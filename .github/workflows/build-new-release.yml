@@ -108,7 +108,7 @@ jobs:
           path: 'jellyfin-web-prerelease'
           ref: ${{ steps.latest-web-prereleasee.outputs.release }}
           
-      - name: Build jellyfin-web
+      - name: Build jellyfin-web Master
         run: |
           cd jellyfin-web-master
           (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
