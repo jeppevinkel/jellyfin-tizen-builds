@@ -202,4 +202,4 @@ jobs:
             jellyfin-tizen/release/Jellyfin.wgt
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
             jellyfin-tizen/master/Jellyfin-master.wgt
-          body: "## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+          body: "${{ github.event.client_payload.data.rawMd }}## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
