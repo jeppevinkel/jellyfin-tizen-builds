@@ -17,4 +17,5 @@ The purpose of this repository is to automatically build the most up-to-date ver
 ```bash
 tizen install -n Jellyfin.wgt -t <the name of your tv>
 ```
+typically locatedi in (C:\tizen-studio\tools\ide\bin)
 > You can find your tv name in Device Manager from Tizen Studio or using `sdb devices`.  
