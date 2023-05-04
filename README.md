@@ -19,3 +19,12 @@ tizen install -n Jellyfin.wgt -t <the name of your tv>
 ```
 typically located in (C:\tizen-studio\tools\ide\bin)
 > You can find your tv name in Device Manager from Tizen Studio or using `sdb devices`.  
+
+## Common issues
+
+### Install failing due to wrong certificate?
+
+This should only happen if you already have a version installed using a different build certificate.  
+This can be solved by uninstalling the app prior to attempting to install this version.
+
+Removing it from the app bar is also not the same as removing it from the device, you need to actually go into the applications menu and remove it from there.
