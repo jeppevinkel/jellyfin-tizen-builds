@@ -124,64 +124,80 @@ jobs:
           (test -f package-lock.json && npm ci --no-audit) || yarn install --frozen-lockfile
           
       - name: Build jellyfin-tizen Master
+        id: buildMaster
+        continue-on-error: true
         run: |
           cd jellyfin-tizen
+          continue-on-error: true 
           JELLYFIN_WEB_DIR=../jellyfin-web-master/dist npm ci --no-audit
 
       - name: Build Master
+        if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-master -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Build jellyfin-tizen Release
+        id: buildRelease
+        continue-on-error: true
         run: |
           cd jellyfin-tizen
           JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
 
       - name: Build
+        if: success() || steps.buildRelease.conclusion == 'success'
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Build jellyfin-tizen PreRelease
+        id: buildPreRelease
+        continue-on-error: true
         run: |
           cd jellyfin-tizen
           rm -rf www
           JELLYFIN_WEB_DIR=../jellyfin-web-prerelease/dist npm ci --no-audit
 
       - name: Build PreRelease
+        if: success() || steps.buildPreRelease.conclusion == 'success'
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Prepare for password prompt
+        if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           
       - name: Package WGT Master
+        if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           expect ./package-master.exp
           mv ./jellyfin-tizen/master/Jellyfin.wgt ./jellyfin-tizen/master/Jellyfin-master.wgt 
           
       - name: Prepare for password prompt
+        if: success() || steps.buildRelease.conclusion == 'success'
         run: |
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           
       - name: Package WGT
+        if: success() || steps.buildRelease.conclusion == 'success'
         run: |
           expect ./package.exp
           
       - name: Prepare for password prompt
+        if: success() || steps.buildPreRelease.conclusion == 'success'
         run: |
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
       
       - name: Package WGT PreRelease
+        if: success() || steps.buildPreRelease.conclusion == 'success'
         run: |
           expect ./package-pre.exp
           mv ./jellyfin-tizen/prerelease/Jellyfin.wgt ./jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt 
