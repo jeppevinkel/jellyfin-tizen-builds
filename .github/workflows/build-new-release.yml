@@ -125,7 +125,7 @@ jobs:
           
       - name: Build jellyfin-tizen Master
         id: buildMaster
-        continue-on-error: true
+#         continue-on-error: true
         run: |
           cd jellyfin-tizen
           continue-on-error: true 
@@ -139,7 +139,7 @@ jobs:
           
       - name: Build jellyfin-tizen Release
         id: buildRelease
-        continue-on-error: true
+#         continue-on-error: true
         run: |
           cd jellyfin-tizen
           JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
@@ -152,7 +152,7 @@ jobs:
           
       - name: Build jellyfin-tizen PreRelease
         id: buildPreRelease
-        continue-on-error: true
+#         continue-on-error: true
         run: |
           cd jellyfin-tizen
           rm -rf www
