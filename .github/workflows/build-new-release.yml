@@ -128,7 +128,6 @@ jobs:
 #         continue-on-error: true
         run: |
           cd jellyfin-tizen
-          continue-on-error: true 
           JELLYFIN_WEB_DIR=../jellyfin-web-master/dist npm ci --no-audit
 
       - name: Build Master
