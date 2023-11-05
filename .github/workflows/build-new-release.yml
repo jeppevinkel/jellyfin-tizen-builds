@@ -144,12 +144,14 @@ jobs:
 #         continue-on-error: true
         run: |
           cd jellyfin-tizen
+          DISCARD_UNUSED_FONTS=1
           JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
 
       - name: Build
         if: success() || steps.buildRelease.conclusion == 'success'
         run: |
           cd jellyfin-tizen
+          DISCARD_UNUSED_FONTS=1
           ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
       - name: Build jellyfin-tizen PreRelease
