@@ -112,19 +112,19 @@ jobs:
         run: |
           cd jellyfin-web-master
           SKIP_PREPARE=1 npm ci --no-audit
-          npm run build:production
+          USE_SYSTEM_FONTS=1 npm run build:production
           
       - name: Build jellyfin-web
         run: |
           cd jellyfin-web
           SKIP_PREPARE=1 npm ci --no-audit
-          npm run build:production
+          USE_SYSTEM_FONTS=1 npm run build:production
           
       - name: Build jellyfin-web PreRelease
         run: |
           cd jellyfin-web-prerelease
           SKIP_PREPARE=1 npm ci --no-audit
-          npm run build:production
+          USE_SYSTEM_FONTS=1 npm run build:production
           
       - name: Build jellyfin-tizen Master
         id: buildMaster
