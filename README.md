@@ -2,6 +2,8 @@
 The purpose of this repository is to automatically build the most up-to-date version of jellyfin-tizen.
 
 ## Installation
+For a one step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).
+
 ### Prerequisites
 - Tizen Studio with CLI (https://developer.tizen.org/development/tizen-studio/download)
 - One of the .wgt files from a release (https://github.com/jeppevinkel/jellyfin-tizen-builds/releases)
