@@ -17,7 +17,7 @@ For a one step install process using Docker, check out this guide made by Georif
 3. Install the package.  
    This command assumes the file you are installing is called `Jellyfin.wgt`. Simply change it to `Jellyfin-prerelease.wgt` if you are installing the prerelease version. Otherwise you can also just rename the file.
 ```bash
-tizen install -n Jellyfin.wgt -t <the name of your tv>
+c:\tizen-studio\tools\ide\bin\tizen.bat install -n Jellyfin.wgt -t <the name of your tv>
 ```
 typically located in (C:\tizen-studio\tools\ide\bin)
 > You can find your tv name in Device Manager from Tizen Studio or using `sdb devices`.  
