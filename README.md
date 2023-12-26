@@ -6,6 +6,7 @@ For a one step install process using Docker, check out this guide made by Georif
 
 ### Prerequisites
 - Tizen Studio with CLI (https://developer.tizen.org/development/tizen-studio/download)
+- Visual C++ Redistributable Packages for VS 2013 x86 and amd64 (https://www.microsoft.com/en-US/download/details.aspx?id=40784)
 - One of the .wgt files from a release (https://github.com/jeppevinkel/jellyfin-tizen-builds/releases)
 
 ### Getting Started
