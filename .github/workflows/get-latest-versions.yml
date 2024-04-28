@@ -72,7 +72,7 @@ jobs:
       - name: Check for differences
         id: diffcheck
         run: |
-          causeOfUpdateLabel=""
+          causeOfUpdateLabel="### Cause of the update\n"
           shouldUpdate=false
           echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}"
           if ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}; then
@@ -89,8 +89,7 @@ jobs:
             causeOfUpdateLabel+="New jellyfin-web prerelease\n"
             shouldUpdate=true
           fi
-
-          # echo "causeOfUpdateLabel<<EOF"$'\n'"$causeOfUpdateLabel"$'\n'EOF >> "$GITHUB_OUTPUT"
+          
           echo "causeOfUpdateLabel=$causeOfUpdateLabel" >> $GITHUB_OUTPUT
 
           if $shouldUpdate; then
