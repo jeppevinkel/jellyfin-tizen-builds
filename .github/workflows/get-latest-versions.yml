@@ -12,7 +12,6 @@ jobs:
       - name: Store versions to variables
         id: versions
         run: |
-          cat versions
           varNames=("hash" "release" "prerelease")
           idx=0
           while IFS= read -r line; do
@@ -20,6 +19,17 @@ jobs:
             echo "${varNames[$idx]}=$line" >> $GITHUB_OUTPUT
             idx=$((idx+1))
           done < versions
+          if [ "$idx" -lt 1 ]; then
+            echo "hash=" >> $GITHUB_OUTPUT
+            echo "release=" >> $GITHUB_OUTPUT
+            echo "prerelease=" >> $GITHUB_OUTPUT
+          elif [ "$idx" -lt 2 ]; then
+            echo "release=" >> $GITHUB_OUTPUT
+            echo "prerelease=" >> $GITHUB_OUTPUT
+          elif [ "$idx" -lt 3 ]; then
+            echo "prerelease=" >> $GITHUB_OUTPUT
+          fi
+          
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
         with:
@@ -31,15 +41,6 @@ jobs:
       - name: Output master commit hash
         run: |
           echo "${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}" > versions
-      # - uses: octokit/request-action@v2.x
-      #   id: get_latest_release_web
-      #   with:
-      #     route: GET /repos/{owner}/{repo}/releases/latest
-      #     owner: jellyfin
-      #     repo: jellyfin-web
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - run: "echo latest release: '${{ fromJson(steps.get_latest_release_web.outputs.data).tag_name }}', '${{ fromJson(steps.get_latest_release_web.outputs.data).html_url }}'"
       - name: "Get Latest Web Release"
         id: last_web_release
         uses: robinraju/release-downloader@cb096d8fa1fcb0e897f30b1c571f07e2c8e12479
