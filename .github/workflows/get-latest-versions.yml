@@ -20,15 +20,38 @@ jobs:
       - name: Output master commit hash
         run: |
           echo "${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}" > versions.txt
-      - uses: octokit/request-action@v2.x
-        id: get_latest_release_web
+      # - uses: octokit/request-action@v2.x
+      #   id: get_latest_release_web
+      #   with:
+      #     route: GET /repos/{owner}/{repo}/releases/latest
+      #     owner: jellyfin
+      #     repo: jellyfin-web
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - run: "echo latest release: '${{ fromJson(steps.get_latest_release_web.outputs.data).tag_name }}', '${{ fromJson(steps.get_latest_release_web.outputs.data).html_url }}'"
+      - name: "Get Latest Web Release"
+        id: last_web_release
+        uses: robinraju/release-downloader@v1.10
         with:
-          route: GET /repos/{owner}/{repo}/releases/latest
-          owner: jellyfin
-          repo: jellyfin-web
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo latest release: '${{ fromJson(steps.get_latest_release_web.outputs.data).tag_name }}', '${{ fromJson(steps.get_latest_release_web.outputs.data).html_url }}'"
+          repository: 'jellyfin/jellyfin-web'
+          latest: true
+          tarBall: false
+          zipBall: false
+      - name: "Get Latest Web PreRelease"
+        id: last_web_prerelease
+        uses: robinraju/release-downloader@v1.10
+        with:
+          repository: 'jellyfin/jellyfin-web'
+          latest: true
+          preRelease: true
+          tarBall: false
+          zipBall: false
+      - name: Output web release tag
+        run: |
+          echo "${{ steps.last_web_release.outputs.tag_name }}" >> versions.txt
+      - name: Output web prerelease tag
+        run: |
+          echo "${{ steps.last_web_prerelease.outputs.tag_name }}" >> versions.txt
       - name: Commit Version Data
         run: |
           git config --global user.name 'jeppevinkel'
