@@ -27,27 +27,43 @@ env:
 
 jobs:
   build:
+    name: Build artifacts
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
+            artifact_name: Jellyfin
+            legacy: true
+          - tag: ${{ github.event.inputs.webPreReleaseTagName }}
+            artifact_name: Jellyfin-prerelease
+            legacy: true
+          - tag: master
+            artifact_name: Jellyfin-master
+            legacy: false
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
+            artifact_name: Jellyfin-TrueHD
+            true_hd: true
+            legacy: true
+          - tag: ${{ github.event.inputs.webPreReleaseTagName }}
+            artifact_name: Jellyfin-prerelease-TrueHD
+            true_hd: true
+            legacy: true
+          - tag: master
+            artifact_name: Jellyfin-master-TrueHD
+            true_hd: true
+            legacy: false
 
     steps:
       - run: env
       
       - name: 'Checkout'
         uses: actions/checkout@v1
-        
-      - name: Get current date
-        id: date
-        run: |
-          echo "date_tag=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
-          echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.0.0
         with:
-          node-version: '>=14'
-          
-      - name: Install Yarn
-        run: npm install --global yarn
+          node-version: '>=16'
           
       - name: Install Needed packages
         run: sudo apt install expect
@@ -76,131 +92,86 @@ jobs:
           repository: 'jellyfin/jellyfin-tizen'
           path: 'jellyfin-tizen'
           
-      - name: Clone jellyfin-web Master
-        uses: actions/checkout@v4
-        with:
-          repository: 'jellyfin/jellyfin-web'
-          path: 'jellyfin-web-master'
-          
       - name: Clone jellyfin-web
         uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-web'
           path: 'jellyfin-web'
-          ref: ${{ github.event.inputs.webReleaseTagName }}
-          
-      - name: Clone jellyfin-web PreRelease
-        uses: actions/checkout@v4
-        with:
-          repository: 'jellyfin/jellyfin-web'
-          path: 'jellyfin-web-prerelease'
-          ref: ${{ github.event.inputs.webPreReleaseTagName }}
-          
-      - name: Build jellyfin-web Master
-        run: |
-          cd jellyfin-web-master
-          npm ci --no-audit
-          USE_SYSTEM_FONTS=1 npm run build:production
+          ref: ${{ matrix.tag }}
           
       - name: Build jellyfin-web
         run: |
           cd jellyfin-web
-          SKIP_PREPARE=1 npm ci --no-audit
-          npm run build:production
-          
-      - name: Build jellyfin-web PreRelease
-        run: |
-          cd jellyfin-web-prerelease
-          SKIP_PREPARE=1 npm ci --no-audit
-          npm run build:production
-          
-      - name: Build jellyfin-tizen Master
+          if ${{ matrix.legacy == true }}; then
+            SKIP_PREPARE=1 npm ci --no-audit
+            npm run build:production
+          else
+            npm ci --no-audit
+            USE_SYSTEM_FONTS=1 npm run build:production
+          fi
+
+      - name: Build jellyfin-tizen
         id: buildMaster
-#         continue-on-error: true
         run: |
           cd jellyfin-tizen
-          JELLYFIN_WEB_DIR=../jellyfin-web-master/dist npm ci --no-audit
 
-      - name: Build Master
-        if: success() || steps.buildMaster.conclusion == 'success'
-        run: |
-          cd jellyfin-tizen
-          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-master -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+          if ${{ matrix.true_hd == true }}; then
+            sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
+          fi
           
-      - name: Build jellyfin-tizen Release
-        id: buildRelease
-#         continue-on-error: true
-        run: |
-          cd jellyfin-tizen
-          rm -rf www
-          DISCARD_UNUSED_FONTS=1 JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+          if ${{ matrix.legacy == true }}; then
+            DISCARD_UNUSED_FONTS=1 JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+          else
+            JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+          fi
 
-      - name: Build
-        if: success() || steps.buildRelease.conclusion == 'success'
+      - name: Build Package
+        if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
-      - name: Build jellyfin-tizen PreRelease
-        id: buildPreRelease
-#         continue-on-error: true
-        run: |
-          cd jellyfin-tizen
-          rm -rf www
-          DISCARD_UNUSED_FONTS=1 JELLYFIN_WEB_DIR=../jellyfin-web-prerelease/dist npm ci --no-audit
-
-      - name: Build PreRelease
-        if: success() || steps.buildPreRelease.conclusion == 'success'
-        run: |
-          cd jellyfin-tizen
-          ../tizen-studio/tools/ide/bin/tizen build-web -out .buildResult-prerelease -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
-          
       - name: Prepare for password prompt
         if: success() || steps.buildMaster.conclusion == 'success'
-        run: |
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          
-      - name: Package WGT Master
-        if: success() || steps.buildMaster.conclusion == 'success'
-        run: |
-          expect ./package-master.exp
-          mv ./jellyfin-tizen/master/Jellyfin.wgt ./jellyfin-tizen/master/Jellyfin-master.wgt 
-          
-      - name: Prepare for password prompt
-        if: success() || steps.buildRelease.conclusion == 'success'
         run: |
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           
       - name: Package WGT
-        if: success() || steps.buildRelease.conclusion == 'success'
+        if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           expect ./package.exp
-          
-      - name: Prepare for password prompt
-        if: success() || steps.buildPreRelease.conclusion == 'success'
-        run: |
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-      
-      - name: Package WGT PreRelease
-        if: success() || steps.buildPreRelease.conclusion == 'success'
-        run: |
-          expect ./package-pre.exp
-          mv ./jellyfin-tizen/prerelease/Jellyfin.wgt ./jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt 
           
       - name: Print logs
         if: always()
         run: cat ./tizen-studio-data/cli/logs/cli.log
-        
-      - name: List All Files
-        if: always()
-        run: ls -R
-          
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: jellyfin-tizen/release/Jellyfin.wgt
+          retention-days: 5
+
+  release:
+    name: Publish the release
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Get current date
+        id: date
+        run: |
+          echo "date_tag=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+          echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v4
+
+      - name: List all directories
+        run: ls
+
       - name: Release Build Result
         uses: softprops/action-gh-release@v2
         with:
@@ -211,3 +182,4 @@ jobs:
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
             jellyfin-tizen/master/Jellyfin-master.wgt
           body: "${{ github.event.inputs.rawMarkdown }}\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.inputs.webPreReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webPreReleaseTagName }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+
