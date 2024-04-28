@@ -101,4 +101,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-new-release.yml
-          inputs: '{"webReleaseUrl": "${{ steps.last_web_release.outputs.html_url }}", "webReleaseTagName": "${{ steps.last_web_release.outputs.tag_name }}", "webPreReleaseUrl": "${{ steps.last_web_prerelease.outputs.html_url }}", "webPreReleaseTagName": "${{ steps.last_web_prerelease.outputs.tag_name }}", "rawMarkdown": "${{ steps.diffcheck.outputs.causeOfUpdateLabel }}"}'
+          inputs: '{"webReleaseTagName": "${{ steps.last_web_release.outputs.tag_name }}", "webPreReleaseTagName": "${{ steps.last_web_prerelease.outputs.tag_name }}", "rawMarkdown": "${{ steps.diffcheck.outputs.causeOfUpdateLabel }}"}'
