@@ -69,22 +69,6 @@ jobs:
           ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizencert.p12" -p 1234
           ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
-        
-      # - name: Get Latest Jellyfin-web
-      #   id: latest-web
-      #   uses: pozetroninc/github-action-get-latest-release@master
-      #   with:
-      #     owner: jellyfin
-      #     repo: jellyfin-web
-      #     excludes: prerelease, draft
-        
-      # - name: Get Latest Jellyfin-web PreRelease
-      #   id: latest-web-prereleasee
-      #   uses: pozetroninc/github-action-get-latest-release@master
-      #   with:
-      #     owner: jellyfin
-      #     repo: jellyfin-web
-      #     excludes: release, draft
     
       - name: Clone jellyfin-tizen
         uses: actions/checkout@v4
