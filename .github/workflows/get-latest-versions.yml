@@ -12,14 +12,14 @@ jobs:
       - name: Store versions to variables
         id: versions
         run: |
-          cat versions.txt
+          cat versions
           varNames=("hash" "release" "prerelease")
           idx=0
           while IFS= read -r line; do
             echo "${varNames[$idx]}=$line"
             echo "${varNames[$idx]}=$line" >> $GITHUB_OUTPUT
             idx=$((idx+1))
-          done < versions.txt
+          done < versions
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
         with:
@@ -30,7 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Output master commit hash
         run: |
-          echo "${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}" > versions.txt
+          echo "${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}" > versions
       # - uses: octokit/request-action@v2.x
       #   id: get_latest_release_web
       #   with:
@@ -59,10 +59,10 @@ jobs:
           zipBall: false
       - name: Output web release tag
         run: |
-          echo "${{ steps.last_web_release.outputs.tag_name }}" >> versions.txt
+          echo "${{ steps.last_web_release.outputs.tag_name }}" >> versions
       - name: Output web prerelease tag
         run: |
-          echo "${{ steps.last_web_prerelease.outputs.tag_name }}" >> versions.txt
+          echo "${{ steps.last_web_prerelease.outputs.tag_name }}" >> versions
       - name: Commit Version Data
         run: |
           git config --global user.name 'jeppevinkel'
