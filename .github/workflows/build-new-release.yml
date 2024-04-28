@@ -6,16 +6,8 @@ on:
 
   workflow_dispatch:
     inputs:
-      webReleaseUrl:
-        description: 'The URL for the jellyfin-web release'
-        required: true
-        type: string
       webReleaseTagName:
         description: 'The tag name for the jellyfin-web release'
-        required: true
-        type: string
-      webPreReleaseUrl:
-        description: 'The URL for the jellyfin-web prerelease'
         required: true
         type: string
       webPreReleaseTagName:
@@ -244,4 +236,4 @@ jobs:
             jellyfin-tizen/release/Jellyfin.wgt
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
             jellyfin-tizen/master/Jellyfin-master.wgt
-          body: "${{ github.event.inputs.rawMarkdown }}## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](${{ github.event.inputs.webReleaseUrl }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.inputs.webPreReleaseTagName }}](${{ github.event.inputs.webPreReleaseUrl }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+          body: "${{ github.event.inputs.rawMarkdown }}## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.inputs.webPreReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webPreReleaseTagName }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
