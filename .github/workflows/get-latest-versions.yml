@@ -19,7 +19,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           echo master commit: '${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}'
-          ${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }} > versions.txt
+          '${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}' > versions.txt
       - uses: octokit/request-action@v2.x
         id: get_latest_release_web
         with:
