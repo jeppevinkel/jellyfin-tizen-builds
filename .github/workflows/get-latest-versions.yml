@@ -69,6 +69,6 @@ jobs:
           git push
       - name: Check for differences
         run: |
-          echo "${{ setps.versions.outputs.hash }}"
-          echo "${{ setps.versions.outputs.release }}"
-          echo "${{ setps.versions.outputs.prerelease }}"
+          echo "${{ steps.versions.outputs.hash }}"
+          echo "${{ steps.versions.outputs.release }}"
+          echo "${{ steps.versions.outputs.prerelease }}"
