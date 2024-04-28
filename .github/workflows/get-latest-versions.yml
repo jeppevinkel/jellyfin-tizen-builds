@@ -67,3 +67,8 @@ jobs:
           git add -A
           git commit -m "Automated Version Update" || echo "No changes to commit"
           git push
+      - name: Check for differences
+        run: |
+          echo "${{ setps.versions.outputs.hash }}"
+          echo "${{ setps.versions.outputs.release }}"
+          echo "${{ setps.versions.outputs.prerelease }}"
