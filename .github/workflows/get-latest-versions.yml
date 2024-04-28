@@ -31,7 +31,7 @@ jobs:
       # - run: "echo latest release: '${{ fromJson(steps.get_latest_release_web.outputs.data).tag_name }}', '${{ fromJson(steps.get_latest_release_web.outputs.data).html_url }}'"
       - name: "Get Latest Web Release"
         id: last_web_release
-        uses: robinraju/release-downloader@v1.10
+        uses: robinraju/release-downloader@cb096d8fa1fcb0e897f30b1c571f07e2c8e12479
         with:
           repository: 'jellyfin/jellyfin-web'
           latest: true
@@ -39,7 +39,7 @@ jobs:
           zipBall: false
       - name: "Get Latest Web PreRelease"
         id: last_web_prerelease
-        uses: robinraju/release-downloader@v1.10
+        uses: robinraju/release-downloader@cb096d8fa1fcb0e897f30b1c571f07e2c8e12479
         with:
           repository: 'jellyfin/jellyfin-web'
           latest: true
