@@ -72,7 +72,7 @@ jobs:
       - name: Check for differences
         id: diffcheck
         run: |
-          causeOfUpdateLabel="Test"
+          causeOfUpdateLabel=""
           shouldUpdate=false
           echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}"
           if ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}; then
