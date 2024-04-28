@@ -12,8 +12,10 @@ jobs:
       - name: Store versions to variables
         id: versions
         run: |
+          varNames=("hash", "release", "prerelease")
+          idx=0
           while IFS= read -r line; do
-            echo "Text read from file: $line"
+            echo "::set-output name=$varNames[$idx++]::$line"
           done < versions.txt
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
