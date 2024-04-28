@@ -73,8 +73,8 @@ jobs:
       - name: Check for differences
         id: diffcheck
         run: |
-          causeOfUpdateLabel = "Test"
-          shouldUpdate = false
+          causeOfUpdateLabel="Test"
+          shouldUpdate=false
           echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}"
           if ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}; then
             causeOfUpdateLabel += "New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}\n"
@@ -91,7 +91,8 @@ jobs:
             shouldUpdate = true
           fi
 
-          echo "causeOfUpdateLabel<<EOF"$'\n'"$causeOfUpdateLabel"$'\n'EOF >> "$GITHUB_OUTPUT"
+          # echo "causeOfUpdateLabel<<EOF"$'\n'"$causeOfUpdateLabel"$'\n'EOF >> "$GITHUB_OUTPUT"
+          echo "causeOfUpdateLabel=$causeOfUpdateLabel" >> $GITHUB_OUTPUT
 
           if $shouldUpdate; then
             echo "shouldUpdate=true" >> $GITHUB_OUTPUT
