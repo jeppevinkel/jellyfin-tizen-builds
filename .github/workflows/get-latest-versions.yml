@@ -15,7 +15,7 @@ jobs:
           varNames=("hash", "release", "prerelease")
           idx=0
           while IFS= read -r line; do
-            echo "::set-output name=$varNames[$idx++]::$line"
+            echo "$varNames[$idx++]=$line" >> $GITHUB_OUTPUT
           done < versions.txt
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
@@ -65,5 +65,5 @@ jobs:
           git config --global user.name 'jeppevinkel'
           git config --global user.email 'jeppevinkel@users.noreply.github.com'
           git add -A
-          git commit -m "Automated Version Update"
+          git commit -m "Automated Version Update" || echo "No changes to commit"
           git push
