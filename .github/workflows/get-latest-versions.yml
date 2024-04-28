@@ -1,0 +1,28 @@
+name: Get Latest Versions
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  getLatestVersions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.x
+        id: get_master_commit_tizen
+        with:
+          route: GET /repos/{owner}/{repo}/commits/master
+          owner: jellyfin
+          repo: jellyfin-tizen
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo master commit: '${{ steps.get_master_commit_tizen.outputs.data }}'"
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release_web
+        with:
+          route: GET /repos/{owner}/{repo}/releases/latest
+          owner: jellyfin
+          repo: jellyfin-web
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo latest release: '${{ steps.get_latest_release_web.outputs.data }}'"
