@@ -71,7 +71,8 @@ jobs:
           git commit -m "Automated Version Update" || echo "No changes to commit"
           git push
       - name: Check for differences
+        id: diffcheck
         run: |
-          echo "${{ steps.versions.outputs.hash }}"
-          echo "${{ steps.versions.outputs.release }}"
-          echo "${{ steps.versions.outputs.prerelease }}"
+          echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != steps.get_master_commit_tizen.outputs.data).sha }}"
+          echo "release: ${{ steps.versions.outputs.release }} = ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}"
+          echo "prerelease: ${{ steps.versions.outputs.prerelease }} = ${{ steps.versions.outputs.prerelease != steps.last_web_prerelease.outputs.tag_name }}"
