@@ -5,6 +5,28 @@ on:
     types: [build_new_release]
 
   workflow_dispatch:
+    inputs:
+      webReleaseUrl:
+        description: 'The URL for the jellyfin-web release'
+        required: true
+        type: string
+      webReleaseTagName:
+        description: 'The tag name for the jellyfin-web release'
+        required: true
+        type: string
+      webPreReleaseUrl:
+        description: 'The URL for the jellyfin-web prerelease'
+        required: true
+        type: string
+      webPreReleaseTagName:
+        description: 'The tag name for the jellyfin-web prerelease'
+        required: true
+        type: string
+      rawMarkdown:
+        description: 'Raw markdown for the release description'
+        required: false
+        default: ''
+        type: string
   
 env:
   TIZEN_STUDIO_VER: 4.5.1
@@ -23,15 +45,15 @@ jobs:
         
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
       
-      - name: Set Release Label
-        uses: haya14busa/action-cond@v1
-        id: label
-        with:
-          cond: ${{ github.event.client_payload.release_label != 0 }}
-          if_true: ${{ github.event.client_payload.release_label }}
-          if_false: ${{ steps.date.outputs.date }}
+      # - name: Set Release Label
+      #   uses: haya14busa/action-cond@v1
+      #   id: label
+      #   with:
+      #     cond: ${{ github.event.client_payload.release_label != 0 }}
+      #     if_true: ${{ github.event.client_payload.release_label }}
+      #     if_false: ${{ steps.date.outputs.date }}
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.0.0
@@ -217,9 +239,9 @@ jobs:
       - name: Release Build Result
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.label.outputs.value }}
+          tag_name: ${{ steps.date.outputs.date }}
           files: |
             jellyfin-tizen/release/Jellyfin.wgt
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
             jellyfin-tizen/master/Jellyfin-master.wgt
-          body: "${{ github.event.client_payload.data.rawMd }}## Normal Version\nJellyfin-Web: [${{ github.event.client_payload.data.webRelease.name }}](${{ github.event.client_payload.data.webRelease.url }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.client_payload.data.webPreRelease.name }}](${{ github.event.client_payload.data.webPreRelease.url }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+          body: "${{ github.event.inputs.rawMarkdown }}## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](${{ github.event.inputs.webReleaseUrl }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.inputs.webPreReleaseTagName }}](${{ github.event.inputs.webPreReleaseUrl }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
