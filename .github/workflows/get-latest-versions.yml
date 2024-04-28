@@ -14,7 +14,7 @@ jobs:
         run: |
           varNames=("hash" "release" "prerelease")
           idx=0
-          if [ -f /path/to/file ]; then
+          if [ -f versions ]; then
             while IFS= read -r line; do
               echo "${varNames[$idx]}=$line"
               echo "${varNames[$idx]}=$line" >> $GITHUB_OUTPUT
