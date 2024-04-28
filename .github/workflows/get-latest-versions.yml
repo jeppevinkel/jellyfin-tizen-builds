@@ -55,6 +55,7 @@ jobs:
           zipBall: false
       - name: Output web release tag
         run: |
+          echo "${{ steps.last_web_release.outputs }}"
           echo "${{ steps.last_web_release.outputs.tag_name }}" >> versions
       - name: Output web prerelease tag
         run: |
