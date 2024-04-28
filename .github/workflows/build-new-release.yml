@@ -231,7 +231,7 @@ jobs:
       - name: Release Build Result
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.date.outputs.date }}
+          tag_name: '${{ steps.date.outputs.date }}'
           files: |
             jellyfin-tizen/release/Jellyfin.wgt
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
