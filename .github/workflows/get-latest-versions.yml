@@ -17,7 +17,8 @@ jobs:
           idx=0
           while IFS= read -r line; do
             echo "${varNames[$idx]}=$line"
-            echo "${varNames[$idx++]}=$line" >> $GITHUB_OUTPUT
+            echo "${varNames[$idx]}=$line" >> $GITHUB_OUTPUT
+            (( idx++ ))
           done < versions.txt
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
