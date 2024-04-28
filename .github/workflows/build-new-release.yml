@@ -37,15 +37,9 @@ jobs:
         
       - name: Get current date
         id: date
-        run: echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
-      
-      # - name: Set Release Label
-      #   uses: haya14busa/action-cond@v1
-      #   id: label
-      #   with:
-      #     cond: ${{ github.event.client_payload.release_label != 0 }}
-      #     if_true: ${{ github.event.client_payload.release_label }}
-      #     if_false: ${{ steps.date.outputs.date }}
+        run: |
+          echo "date_tag=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+          echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.0.0
@@ -76,21 +70,21 @@ jobs:
           ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
         
-      - name: Get Latest Jellyfin-web
-        id: latest-web
-        uses: pozetroninc/github-action-get-latest-release@master
-        with:
-          owner: jellyfin
-          repo: jellyfin-web
-          excludes: prerelease, draft
+      # - name: Get Latest Jellyfin-web
+      #   id: latest-web
+      #   uses: pozetroninc/github-action-get-latest-release@master
+      #   with:
+      #     owner: jellyfin
+      #     repo: jellyfin-web
+      #     excludes: prerelease, draft
         
-      - name: Get Latest Jellyfin-web PreRelease
-        id: latest-web-prereleasee
-        uses: pozetroninc/github-action-get-latest-release@master
-        with:
-          owner: jellyfin
-          repo: jellyfin-web
-          excludes: release, draft
+      # - name: Get Latest Jellyfin-web PreRelease
+      #   id: latest-web-prereleasee
+      #   uses: pozetroninc/github-action-get-latest-release@master
+      #   with:
+      #     owner: jellyfin
+      #     repo: jellyfin-web
+      #     excludes: release, draft
     
       - name: Clone jellyfin-tizen
         uses: sudosubin/git-clone-action@v1.0.1
@@ -107,20 +101,20 @@ jobs:
           path: 'jellyfin-web-master'
           
       - name: Clone jellyfin-web
-        uses: sudosubin/git-clone-action@v1.0.1
+        uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-web'
           platform: 'github'
           path: 'jellyfin-web'
-          ref: ${{ steps.latest-web.outputs.release }}
+          ref: ${{ github.event.inputs.webReleaseTagName }}
           
       - name: Clone jellyfin-web PreRelease
-        uses: sudosubin/git-clone-action@v1.0.1
+        uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-web'
           platform: 'github'
           path: 'jellyfin-web-prerelease'
-          ref: ${{ steps.latest-web-prereleasee.outputs.release }}
+          ref: ${{ github.event.inputs.webPreReleaseTagName }}
           
       - name: Build jellyfin-web Master
         run: |
@@ -229,9 +223,10 @@ jobs:
         run: ls -R
           
       - name: Release Build Result
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: '${{ steps.date.outputs.date }}'
+          tag_name: '${{ steps.date.outputs.date_tag }}'
+          name: '${{ steps.date.outputs.date }}'
           files: |
             jellyfin-tizen/release/Jellyfin.wgt
             jellyfin-tizen/prerelease/Jellyfin-prerelease.wgt
