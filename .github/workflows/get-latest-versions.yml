@@ -77,18 +77,18 @@ jobs:
           shouldUpdate=false
           echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}"
           if ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}; then
-            causeOfUpdateLabel += "New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}\n"
-            shouldUpdate = true
+            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}\n"
+            shouldUpdate=true
           fi
           echo "release: ${{ steps.versions.outputs.release }} = ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}"
           if ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}; then
-            causeOfUpdateLabel += "New jellyfin-web release\n"
-            shouldUpdate = true
+            causeOfUpdateLabel+="New jellyfin-web release\n"
+            shouldUpdate=true
           fi
           echo "prerelease: ${{ steps.versions.outputs.prerelease }} = ${{ steps.versions.outputs.prerelease != steps.last_web_prerelease.outputs.tag_name }}"
           if ${{ steps.versions.outputs.prerelease != steps.last_web_prerelease.outputs.tag_name }}; then
-            causeOfUpdateLabel += "New jellyfin-web prerelease\n"
-            shouldUpdate = true
+            causeOfUpdateLabel+="New jellyfin-web prerelease\n"
+            shouldUpdate=true
           fi
 
           # echo "causeOfUpdateLabel<<EOF"$'\n'"$causeOfUpdateLabel"$'\n'EOF >> "$GITHUB_OUTPUT"
