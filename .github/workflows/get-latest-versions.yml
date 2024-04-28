@@ -35,7 +35,7 @@ jobs:
         with:
           repository: 'jellyfin/jellyfin-web'
           latest: true
-          tarBall: false
+          tarBall: true
           zipBall: false
       - name: "Get Latest Web PreRelease"
         id: last_web_prerelease
@@ -44,7 +44,7 @@ jobs:
           repository: 'jellyfin/jellyfin-web'
           latest: true
           preRelease: true
-          tarBall: false
+          tarBall: true
           zipBall: false
       - name: Output web release tag
         run: |
