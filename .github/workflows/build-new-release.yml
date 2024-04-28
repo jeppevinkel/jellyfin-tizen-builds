@@ -37,7 +37,7 @@ jobs:
         
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+        run: echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
       
       # - name: Set Release Label
       #   uses: haya14busa/action-cond@v1
