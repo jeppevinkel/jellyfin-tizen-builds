@@ -73,6 +73,6 @@ jobs:
       - name: Check for differences
         id: diffcheck
         run: |
-          echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != steps.get_master_commit_tizen.outputs.data).sha }}"
+          echo "hash: ${{ steps.versions.outputs.hash }} = $((${{ steps.versions.outputs.hash }} != ${{fromJson(steps.get_master_commit_tizen.outputs.data).sha}}))"
           echo "release: ${{ steps.versions.outputs.release }} = ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}"
           echo "prerelease: ${{ steps.versions.outputs.prerelease }} = ${{ steps.versions.outputs.prerelease != steps.last_web_prerelease.outputs.tag_name }}"
