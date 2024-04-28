@@ -33,5 +33,6 @@ jobs:
         run: |
           git config --global user.name 'jeppevinkel'
           git config --global user.email 'jeppevinkel@users.noreply.github.com'
-          git commit -am "Automated Version Update"
+          git add -A
+          git commit -m "Automated Version Update"
           git push
