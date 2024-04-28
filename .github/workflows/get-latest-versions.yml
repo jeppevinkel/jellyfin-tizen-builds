@@ -16,7 +16,7 @@ jobs:
           repo: jellyfin-tizen
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo master commit: '${{ steps.get_master_commit_tizen.outputs.data }}'"
+      - run: "echo master commit: '${{ steps.get_master_commit_tizen.outputs.data.sha }}'"
       - uses: octokit/request-action@v2.x
         id: get_latest_release_web
         with:
