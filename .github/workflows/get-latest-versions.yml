@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Store versions to variables
+        id: versions
+        run: |
+          while IFS= read -r line; do
+            echo "Text read from file: $line"
+          done < versions.txt
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
         with:
