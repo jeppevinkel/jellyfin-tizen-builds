@@ -142,7 +142,7 @@ jobs:
         if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           expect ./package.exp
-          if ${{ matrix.artifact_name != 'Jellyfin }}; then
+          if ${{ matrix.artifact_name != 'Jellyfin' }}; then
             mv ./jellyfin-tizen/release/Jellyfin.wgt ./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
           fi
           
