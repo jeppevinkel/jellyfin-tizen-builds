@@ -87,24 +87,21 @@ jobs:
       #     excludes: release, draft
     
       - name: Clone jellyfin-tizen
-        uses: sudosubin/git-clone-action@v1.0.1
+        uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-tizen'
-          platform: 'github'
           path: 'jellyfin-tizen'
           
       - name: Clone jellyfin-web Master
-        uses: sudosubin/git-clone-action@v1.0.1
+        uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-web'
-          platform: 'github'
           path: 'jellyfin-web-master'
           
       - name: Clone jellyfin-web
         uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-web'
-          platform: 'github'
           path: 'jellyfin-web'
           ref: ${{ github.event.inputs.webReleaseTagName }}
           
@@ -112,7 +109,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'jellyfin/jellyfin-web'
-          platform: 'github'
           path: 'jellyfin-web-prerelease'
           ref: ${{ github.event.inputs.webPreReleaseTagName }}
           
