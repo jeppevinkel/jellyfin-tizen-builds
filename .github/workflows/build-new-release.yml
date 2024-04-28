@@ -142,7 +142,9 @@ jobs:
         if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           expect ./package.exp
-          mv ./jellyfin-tizen/release/Jellyfin.wgt ./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
+          if ${{ matrix.artifact_name != 'Jellyfin }}; then
+            mv ./jellyfin-tizen/release/Jellyfin.wgt ./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
+          fi
           
       - name: Print logs
         if: always()
@@ -152,7 +154,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact_name }}
-          path: jellyfin-tizen/release/Jellyfin.wgt
+          path: jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
           retention-days: 5
 
   release:
