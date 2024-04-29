@@ -51,7 +51,7 @@ jobs:
             legacy: false
           - tag: intros
             repository: Bobby306/jellyfin-web
-            artifact_name: Jellyfin-intros-TrueHD
+            artifact_name: Jellyfin-intros
             legacy: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
