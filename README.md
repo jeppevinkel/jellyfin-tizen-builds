@@ -1,6 +1,15 @@
 # jellyfin-tizen-builds
 The purpose of this repository is to automatically build the most up-to-date version of jellyfin-tizen.
 
+## Versions
+| Filename                | Description                                                                                                               |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Jellyfin.wgt            | Built with the latest stable release of jellyfin-web                                                                      |
+| Jellyfin-prerelease.wgt | Built with the latest prerelease of jellyfin-web (this can sometimes be older than the stable release)                    |
+| Jellyfin-master.wgt     | Built with the latest potentially unstable changes to jellyfin-web code (this will always be the newest possible version) |
+| TrueHD                  | TrueHD support is enabled. Whether it works or not might depend on TV model                                               |
+| intros                  | Built with the modified web interface for https://github.com/306bobby/intro-skipper (untested)                            |
+
 ## Installation
 For a one step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).
 
