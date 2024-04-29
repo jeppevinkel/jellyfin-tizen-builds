@@ -19,6 +19,11 @@ on:
         required: false
         default: ''
         type: string
+      prerelease:
+        description: 'Set if the release should be marked as a prerelease'
+        required: false
+        default: false
+        type: boolean
   
 env:
   TIZEN_STUDIO_VER: 4.5.1
@@ -33,26 +38,41 @@ jobs:
       matrix:
         include:
           - tag: ${{ github.event.inputs.webReleaseTagName }}
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin
             legacy: true
           - tag: ${{ github.event.inputs.webPreReleaseTagName }}
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-prerelease
             legacy: true
           - tag: master
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-master
             legacy: false
+          - tag: intros
+            repository: Bobby306/jellyfin-web
+            artifact_name: Jellyfin-intros-TrueHD
+            legacy: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-TrueHD
             true_hd: true
             legacy: true
           - tag: ${{ github.event.inputs.webPreReleaseTagName }}
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-prerelease-TrueHD
             true_hd: true
             legacy: true
           - tag: master
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-master-TrueHD
             true_hd: true
             legacy: false
+          - tag: intros
+            repository: Bobby306/jellyfin-web
+            artifact_name: Jellyfin-intros-TrueHD
+            true_hd: true
+            legacy: true
 
     steps:
       - run: env
@@ -95,7 +115,7 @@ jobs:
       - name: Clone jellyfin-web
         uses: actions/checkout@v4
         with:
-          repository: 'jellyfin/jellyfin-web'
+          repository: ${{ matrix.repository }}
           path: 'jellyfin-web'
           ref: ${{ matrix.tag }}
           
@@ -183,4 +203,5 @@ jobs:
           files: |
             **/*.wgt
           body: "${{ github.event.inputs.rawMarkdown }}\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.inputs.webPreReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webPreReleaseTagName }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+          prerelease: ${{ github.event.inputs.prerelease == true }}
 
