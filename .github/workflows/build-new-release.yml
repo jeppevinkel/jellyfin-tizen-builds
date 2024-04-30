@@ -42,6 +42,7 @@ jobs:
     name: Build artifacts
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         include:
           - tag: ${{ github.event.inputs.webReleaseTagName }}
