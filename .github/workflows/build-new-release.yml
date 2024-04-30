@@ -80,6 +80,11 @@ jobs:
             artifact_name: Jellyfin-intros-TrueHD
             true_hd: true
             legacy: true
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-secondary
+            legacy: true
+            secondary: true
 
     steps:
       - run: env
@@ -144,6 +149,13 @@ jobs:
 
           if ${{ matrix.true_hd == true }}; then
             sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
+          fi
+          
+          if ${{ matrix.secondary == true }}; then
+            sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
+            sed -i 's/<name>Jellyfin<\/name>/<name>Jellyfin 2<\/name>/g' config.xml
+            rm icon.png
+            mv ../icon2.png icon.png
           fi
           
           if ${{ matrix.legacy == true }}; then
