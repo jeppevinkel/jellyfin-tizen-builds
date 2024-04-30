@@ -189,7 +189,12 @@ jobs:
         run: |
           expect ./package.exp
           if ${{ matrix.artifact_name != 'Jellyfin' }}; then
-            mv ./jellyfin-tizen/release/Jellyfin.wgt ./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
+
+            if ${{ matrix.secondary == true }}; then
+              mv "./jellyfin-tizen/release/Jellyfin 2.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
+            else
+              mv "./jellyfin-tizen/release/Jellyfin.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
+            fi
           fi
           
       - name: Print logs
