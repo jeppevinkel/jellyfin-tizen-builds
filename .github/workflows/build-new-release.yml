@@ -24,6 +24,11 @@ on:
         required: false
         default: false
         type: boolean
+      jellyfinTizenRef:
+        description: 'Set to use a specific commit or tag'
+        required: false
+        default: 'master'
+        type: string
   
 env:
   TIZEN_STUDIO_VER: 4.5.1
@@ -94,9 +99,9 @@ jobs:
         uses: actions/checkout@v1
       
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3.0.0
+        uses: actions/setup-node@v4
         with:
-          node-version: '>=16'
+          node-version: '>=20'
           
       - name: Install Needed packages
         run: sudo apt install expect
@@ -124,6 +129,7 @@ jobs:
         with:
           repository: 'jellyfin/jellyfin-tizen'
           path: 'jellyfin-tizen'
+          ref: ${{ github.event.inputs.jellyfinTizenRef }}
           
       - name: Clone jellyfin-web
         uses: actions/checkout@v4
