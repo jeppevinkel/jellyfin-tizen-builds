@@ -54,7 +54,7 @@ jobs:
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin
-            legacy: true
+            legacy: false
           - tag: ${{ github.event.inputs.webPreReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-prerelease
@@ -71,7 +71,7 @@ jobs:
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-TrueHD
             true_hd: true
-            legacy: true
+            legacy: false
           - tag: ${{ github.event.inputs.webPreReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-prerelease-TrueHD
@@ -90,7 +90,7 @@ jobs:
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-secondary
-            legacy: true
+            legacy: false
             secondary: true
 
     steps:
