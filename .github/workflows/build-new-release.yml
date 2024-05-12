@@ -227,6 +227,15 @@ jobs:
       - name: List all directories
         run: ls
 
+      - name: Check if any artifacts exists
+        shell: bash
+        run: |
+          count=$(find . -type f -name '*.wgt' -printf x | wc -c)
+          if [ $foo -le 0 ]; then
+            echo "::error title=NoWGT::No wgt files were built"
+            exit 1
+          fi
+
       - name: Release Build Result
         uses: softprops/action-gh-release@v2
         with:
