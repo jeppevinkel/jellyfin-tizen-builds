@@ -231,7 +231,7 @@ jobs:
         shell: bash
         run: |
           count=$(find . -type f -name '*.wgt' -printf x | wc -c)
-          if [ $foo -le 0 ]; then
+          if [ $count -le 0 ]; then
             echo "::error title=NoWGT::No wgt files were built"
             exit 1
           fi
