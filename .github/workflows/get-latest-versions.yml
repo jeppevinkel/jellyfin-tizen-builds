@@ -38,20 +38,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: octokit/request-action@v2.x
-        id: get_10_9_z_commit_tizen
+        id: get_10_9_z_commit_web
         with:
           route: GET /repos/{owner}/{repo}/commits/{branch}
           owner: jellyfin
-          repo: jellyfin-tizen
+          repo: jellyfin-web
           branch: release-10.9.z
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: octokit/request-action@v2.x
-        id: get_10_8_z_commit_tizen
+        id: get_10_8_z_commit_web
         with:
           route: GET /repos/{owner}/{repo}/commits/{branch}
           owner: jellyfin
-          repo: jellyfin-tizen
+          repo: jellyfin-web
           branch: release-10.8.z
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -60,10 +60,10 @@ jobs:
           echo "${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}" > versions
       - name: Output release-10.9.z commit hash
         run: |
-          echo "${{ fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha }}" >> versions
+          echo "${{ fromJson(steps.get_10_9_z_commit_web.outputs.data).sha }}" >> versions
       - name: Output release-10.8.z commit hash
         run: |
-          echo "${{ fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha }}" >> versions
+          echo "${{ fromJson(steps.get_10_8_z_commit_web.outputs.data).sha }}" >> versions
       - name: "Get Latest Web Release"
         id: last_web_release
         uses: robinraju/release-downloader@cb096d8fa1fcb0e897f30b1c571f07e2c8e12479
@@ -92,14 +92,14 @@ jobs:
             causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}\n"
             shouldUpdate=true
           fi
-          echo "release-10.9.z: ${{ steps.versions.outputs.release_10_9_z }} = ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha}}"
-          if ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha}}; then
-            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha }}\n"
+          echo "release-10.9.z: ${{ steps.versions.outputs.release_10_9_z }} = ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_web.outputs.data).sha}}"
+          if ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_web.outputs.data).sha}}; then
+            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_10_9_z_commit_web.outputs.data).sha }}\n"
             shouldUpdate=true
           fi
-          echo "release-10.8.z: ${{ steps.versions.outputs.release_10_8_z }} = ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha}}"
-          if ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha}}; then
-            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha }}\n"
+          echo "release-10.8.z: ${{ steps.versions.outputs.release_10_8_z }} = ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_web.outputs.data).sha}}"
+          if ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_web.outputs.data).sha}}; then
+            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_10_8_z_commit_web.outputs.data).sha }}\n"
             shouldUpdate=true
           fi
           echo "release: ${{ steps.versions.outputs.release }} = ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}"
