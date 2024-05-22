@@ -1,6 +1,8 @@
 # jellyfin-tizen-builds
 The purpose of this repository is to automatically build the most up-to-date version of jellyfin-tizen.
 
+For real-time-ish communications, you can join my [Discord server](https://discord.gg/DGnRQUJ).
+
 ## Versions
 | File name    | Description                                                                                                               |
 |--------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -40,4 +42,4 @@ typically located in (C:\tizen-studio\tools\ide\bin)
 This should only happen if you already have a version installed using a different build certificate.  
 This can be solved by uninstalling the app prior to attempting to install this version.
 
-Removing it from the app bar is also not the same as removing it from the device, you need to actually go into the applications menu and remove it from there.
+Removing it from the app bar is not the same as removing it from the device, you need to actually go into the applications menu and remove it from there.
