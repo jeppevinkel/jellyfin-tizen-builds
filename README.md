@@ -7,7 +7,8 @@ For real-time-ish communications, you can join my [Discord server](https://disco
 | File name    | Description                                                                                                               |
 |--------------|---------------------------------------------------------------------------------------------------------------------------|
 | Jellyfin.wgt | Built with the latest stable release of jellyfin-web                                                                      |
-| prerelease   | Built with the latest prerelease of jellyfin-web (this can sometimes be older than the stable release)                    |
+| 10.9.z       | Built with the bleeding edge of the branch for the 10.9.z releases                                                        |
+| 10.8.z       | Built with the bleeding edge of the branch for the 10.8.z releases                                                        |
 | master       | Built with the latest potentially unstable changes to jellyfin-web code (this will always be the newest possible version) |
 | TrueHD       | TrueHD support is enabled (whether it works or not might depend on TV model)                                              |
 | intros       | Built with the modified web interface for https://github.com/306bobby/intro-skipper (untested)                            |
