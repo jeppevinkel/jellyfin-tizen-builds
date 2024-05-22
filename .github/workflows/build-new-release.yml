@@ -20,11 +20,6 @@ on:
         required: false
         default: false
         type: boolean
-      jellyfinTizenRef:
-        description: 'Set to use a specific commit or tag'
-        required: false
-        default: 'master'
-        type: string
   
 env:
   TIZEN_STUDIO_VER: 4.5.1
@@ -74,12 +69,12 @@ jobs:
             legacy: false
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-prerelease-TrueHD
+            artifact_name: Jellyfin-10.9.z-TrueHD
             true_hd: true
             legacy: false
           - tag: release-10.8.z
             repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-prerelease-TrueHD
+            artifact_name: Jellyfin-10.8.z-TrueHD
             true_hd: true
             legacy: true
           - tag: master
@@ -139,7 +134,7 @@ jobs:
         with:
           repository: 'jellyfin/jellyfin-tizen'
           path: 'jellyfin-tizen'
-          ref: ${{ github.event.inputs.jellyfinTizenRef }}
+          ref: ${{ matrix.legacy == true && '8ebbd10643c10033223d6bf1d7fd7d59fba28fe1' || 'master' }}
           
       - name: Clone jellyfin-web
         uses: actions/checkout@v4
