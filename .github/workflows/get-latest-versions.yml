@@ -14,7 +14,7 @@ jobs:
       - name: Store versions to variables
         id: versions
         run: |
-          varNames=("hash" "release" "prerelease")
+          varNames=("master" "release_10_9_z" "release_10_8_z" "release")
           idx=0
           if [ -f versions ]; then
             while IFS= read -r line; do
@@ -23,21 +23,47 @@ jobs:
               idx=$((idx+1))
             done < versions
           else
-            echo "hash=" >> $GITHUB_OUTPUT
+            echo "master=" >> $GITHUB_OUTPUT
+            echo "release_10_9_z=" >> $GITHUB_OUTPUT
+            echo "release_10_8_z=" >> $GITHUB_OUTPUT
             echo "release=" >> $GITHUB_OUTPUT
-            echo "prerelease=" >> $GITHUB_OUTPUT
           fi
       - uses: octokit/request-action@v2.x
         id: get_master_commit_tizen
         with:
-          route: GET /repos/{owner}/{repo}/commits/master
+          route: GET /repos/{owner}/{repo}/commits/{branch}
           owner: jellyfin
           repo: jellyfin-tizen
+          branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: octokit/request-action@v2.x
+        id: get_10_9_z_commit_tizen
+        with:
+          route: GET /repos/{owner}/{repo}/commits/{branch}
+          owner: jellyfin
+          repo: jellyfin-tizen
+          branch: release-10.9.z
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: octokit/request-action@v2.x
+        id: get_10_8_z_commit_tizen
+        with:
+          route: GET /repos/{owner}/{repo}/commits/{branch}
+          owner: jellyfin
+          repo: jellyfin-tizen
+          branch: release-10.8.z
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Output master commit hash
         run: |
           echo "${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}" > versions
+      - name: Output release-10.9.z commit hash
+        run: |
+          echo "${{ fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha }}" >> versions
+      - name: Output release-10.8.z commit hash
+        run: |
+          echo "${{ fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha }}" >> versions
       - name: "Get Latest Web Release"
         id: last_web_release
         uses: robinraju/release-downloader@cb096d8fa1fcb0e897f30b1c571f07e2c8e12479
@@ -46,22 +72,9 @@ jobs:
           latest: true
           tarBall: true
           zipBall: false
-      - name: "Get Latest Web PreRelease"
-        id: last_web_prerelease
-        uses: robinraju/release-downloader@cb096d8fa1fcb0e897f30b1c571f07e2c8e12479
-        with:
-          repository: 'jellyfin/jellyfin-web'
-          latest: true
-          preRelease: true
-          tarBall: true
-          zipBall: false
       - name: Output web release tag
         run: |
-          echo "${{ toJson(steps.last_web_release.outputs) }}"
           echo "${{ steps.last_web_release.outputs.tag_name }}" >> versions
-      - name: Output web prerelease tag
-        run: |
-          echo "${{ steps.last_web_prerelease.outputs.tag_name }}" >> versions
       - name: Commit Version Data
         run: |
           git config --global user.name 'jeppevinkel'
@@ -74,19 +87,24 @@ jobs:
         run: |
           causeOfUpdateLabel="### Cause of the update\n"
           shouldUpdate=false
-          echo "hash: ${{ steps.versions.outputs.hash }} = ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}"
-          if ${{ steps.versions.outputs.hash != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}; then
+          echo "master: ${{ steps.versions.outputs.master }} = ${{ steps.versions.outputs.master != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}"
+          if ${{ steps.versions.outputs.master != fromJson(steps.get_master_commit_tizen.outputs.data).sha}}; then
             causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_master_commit_tizen.outputs.data).sha }}\n"
+            shouldUpdate=true
+          fi
+          echo "release-10.9.z: ${{ steps.versions.outputs.release_10_9_z }} = ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha}}"
+          if ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha}}; then
+            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_10_9_z_commit_tizen.outputs.data).sha }}\n"
+            shouldUpdate=true
+          fi
+          echo "release-10.8.z: ${{ steps.versions.outputs.release_10_8_z }} = ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha}}"
+          if ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha}}; then
+            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-tizen/commit/${{ fromJson(steps.get_10_8_z_commit_tizen.outputs.data).sha }}\n"
             shouldUpdate=true
           fi
           echo "release: ${{ steps.versions.outputs.release }} = ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}"
           if ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}; then
             causeOfUpdateLabel+="New jellyfin-web release\n"
-            shouldUpdate=true
-          fi
-          echo "prerelease: ${{ steps.versions.outputs.prerelease }} = ${{ steps.versions.outputs.prerelease != steps.last_web_prerelease.outputs.tag_name }}"
-          if ${{ steps.versions.outputs.prerelease != steps.last_web_prerelease.outputs.tag_name }}; then
-            causeOfUpdateLabel+="New jellyfin-web prerelease\n"
             shouldUpdate=true
           fi
           
@@ -102,4 +120,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-new-release.yml
-          inputs: '{"webReleaseTagName": "${{ steps.last_web_release.outputs.tag_name }}", "webPreReleaseTagName": "${{ steps.last_web_prerelease.outputs.tag_name }}", "rawMarkdown": "${{ steps.diffcheck.outputs.causeOfUpdateLabel }}"}'
+          inputs: '{"webReleaseTagName": "${{ steps.last_web_release.outputs.tag_name }}", "rawMarkdown": "${{ steps.diffcheck.outputs.causeOfUpdateLabel }}"}'
