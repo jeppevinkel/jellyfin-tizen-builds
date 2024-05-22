@@ -92,6 +92,11 @@ jobs:
             artifact_name: Jellyfin-secondary
             legacy: false
             secondary: true
+          - tag: release-10.9.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.9.z-secondary
+            legacy: false
+            secondary: true
 
     steps:
       - run: env
