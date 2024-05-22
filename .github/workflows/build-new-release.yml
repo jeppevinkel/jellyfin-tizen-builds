@@ -10,10 +10,6 @@ on:
         description: 'The tag name for the jellyfin-web release'
         required: true
         type: string
-      webPreReleaseTagName:
-        description: 'The tag name for the jellyfin-web prerelease'
-        required: true
-        type: string
       rawMarkdown:
         description: 'Raw markdown for the release description'
         required: false
@@ -55,9 +51,13 @@ jobs:
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin
             legacy: false
-          - tag: ${{ github.event.inputs.webPreReleaseTagName }}
+          - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-prerelease
+            artifact_name: Jellyfin-10.9.z
+            legacy: false
+          - tag: release-10.8.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.8.z
             legacy: true
           - tag: master
             repository: jellyfin/jellyfin-web
@@ -72,7 +72,12 @@ jobs:
             artifact_name: Jellyfin-TrueHD
             true_hd: true
             legacy: false
-          - tag: ${{ github.event.inputs.webPreReleaseTagName }}
+          - tag: release-10.9.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-prerelease-TrueHD
+            true_hd: true
+            legacy: false
+          - tag: release-10.8.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-prerelease-TrueHD
             true_hd: true
@@ -246,6 +251,6 @@ jobs:
           name: '${{ steps.date.outputs.date }}'
           files: |
             **/*.wgt
-          body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## PreRelease Version\nJellyfin-web: [${{ github.event.inputs.webPreReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webPreReleaseTagName }})  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+          body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
           prerelease: ${{ github.event.inputs.prerelease }}
 
