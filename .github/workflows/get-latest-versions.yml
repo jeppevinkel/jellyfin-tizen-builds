@@ -94,12 +94,12 @@ jobs:
           fi
           echo "release-10.9.z: ${{ steps.versions.outputs.release_10_9_z }} = ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_web.outputs.data).sha}}"
           if ${{ steps.versions.outputs.release_10_9_z != fromJson(steps.get_10_9_z_commit_web.outputs.data).sha}}; then
-            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-web/commit/${{ fromJson(steps.get_10_9_z_commit_web.outputs.data).sha }}\n"
+            causeOfUpdateLabel+="New commit to Jellyfin-10.9.z https://github.com/jellyfin/jellyfin-web/commit/${{ fromJson(steps.get_10_9_z_commit_web.outputs.data).sha }}\n"
             shouldUpdate=true
           fi
           echo "release-10.8.z: ${{ steps.versions.outputs.release_10_8_z }} = ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_web.outputs.data).sha}}"
           if ${{ steps.versions.outputs.release_10_8_z != fromJson(steps.get_10_8_z_commit_web.outputs.data).sha}}; then
-            causeOfUpdateLabel+="New commit to https://github.com/jellyfin/jellyfin-web/commit/${{ fromJson(steps.get_10_8_z_commit_web.outputs.data).sha }}\n"
+            causeOfUpdateLabel+="New commit to Jellyfin-10.8.z https://github.com/jellyfin/jellyfin-web/commit/${{ fromJson(steps.get_10_8_z_commit_web.outputs.data).sha }}\n"
             shouldUpdate=true
           fi
           echo "release: ${{ steps.versions.outputs.release }} = ${{ steps.versions.outputs.release != steps.last_web_release.outputs.tag_name }}"
