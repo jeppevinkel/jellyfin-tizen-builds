@@ -164,7 +164,8 @@ jobs:
           fi
 
           if ${{ matrix.inject_intros == true }}; then
-            sed -i 's/<\/head>/<script src="configurationpage?name=skip-intro-button.js"><\/script><\/head>/g' dist/index.html
+            wget -O dist/inject-intros.js https://raw.githubusercontent.com/jumoog/intro-skipper/master/ConfusedPolarBear.Plugin.IntroSkipper/Configuration/inject.js
+            sed -i 's/<\/head>/<script src="inject-intros.js"><\/script><\/head>/g' dist/index.html
           fi
 
       - name: Upload Artifact
