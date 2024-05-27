@@ -167,6 +167,14 @@ jobs:
             sed -i 's/<\/head>/<script src="configurationpage?name=skip-intro-button.js"><\/script><\/head>/g' dist/index.html
           fi
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        if: matrix.inject_intros == true
+        with:
+          name: jellyfin-web-intro-injected
+          path: jellyfin-web/dist
+          retention-days: 5
+
       - name: Build jellyfin-tizen
         id: buildMaster
         run: |
