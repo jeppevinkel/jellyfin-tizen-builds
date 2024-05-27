@@ -62,6 +62,11 @@ jobs:
             repository: Bobby306/jellyfin-web
             artifact_name: Jellyfin-intros
             legacy: true
+          - tag: release-10.9.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.9.z-intros
+            legacy: false
+            inject_intros: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-TrueHD
@@ -156,6 +161,10 @@ jobs:
           else
             npm ci --no-audit
             USE_SYSTEM_FONTS=1 npm run build:production
+          fi
+
+          if ${{ matrix.inject_intros == true }}; then
+            sed -i 's/</head>/<script src="configurationpage?name=skip-intro-button.js"></script></head>/g' dist/index.html
           fi
 
       - name: Build jellyfin-tizen
