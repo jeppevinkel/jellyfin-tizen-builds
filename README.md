@@ -15,7 +15,8 @@ For real-time-ish communications, you can join my [Discord server](https://disco
 | secondary    | Built with the latest stable release of jellyfin-web and a different app ID to allow having a second account signed in    |
 
 ## Installation
-For a one step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).
+For a one step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).  
+*I have no affiliation with Georift and I can't provide support related to that project since I have not personally used it or helped in its creation.*
 
 ### Prerequisites
 - Tizen Studio with CLI (https://developer.tizen.org/development/tizen-studio/download)
