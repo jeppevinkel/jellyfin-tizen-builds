@@ -14,6 +14,8 @@ For real-time-ish communications, you can join my [Discord server](https://disco
 | intros       | Built with the modified web interface for https://github.com/306bobby/intro-skipper (untested)                            |
 | secondary    | Built with the latest stable release of jellyfin-web and a different app ID to allow having a second account signed in    |
 
+*Disclaimer: I don't have many success stories with TVs older than 2018, but a few people in my Discord server have reported it working for their 2015 and 2016 TVs with the `10.8.z` version*
+
 ## Installation
 For a one step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).  
 *I have no affiliation with Georift and I can't provide support related to that project since I have not personally used it or helped in its creation.*
