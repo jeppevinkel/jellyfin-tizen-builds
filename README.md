@@ -36,6 +36,10 @@ For a one step install process using Docker, check out this guide made by Georif
 ```bash
 c:\tizen-studio\tools\ide\bin\tizen.bat install -n Jellyfin.wgt -t <the name of your tv>
 ```
+On Mac the command is instead
+```bash
+$HOME/tizen-studio/tools/ide/bin/tizen install -n Jellyfin.wgt -t <the name of your tv>
+```
 typically located in (C:\tizen-studio\tools\ide\bin)
 > You can find your tv name in Device Manager from Tizen Studio or using `sdb devices`.  
 
