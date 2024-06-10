@@ -58,10 +58,11 @@ jobs:
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-master
             legacy: false
-          - tag: intros
-            repository: Bobby306/jellyfin-web
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-intros
-            legacy: true
+            legacy: false
+            inject_intros: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-intros
