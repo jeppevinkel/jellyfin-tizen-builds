@@ -11,7 +11,7 @@ For real-time-ish communications, you can join my [Discord server](https://disco
 | 10.8.z       | Built with the bleeding edge of the branch for the 10.8.z releases                                                        |
 | master       | Built with the latest potentially unstable changes to jellyfin-web code (this will always be the newest possible version) |
 | TrueHD       | TrueHD support is enabled (whether it works or not might depend on TV model)                                              |
-| intros       | Built with the modified web interface for https://github.com/306bobby/intro-skipper (untested)                            |
+| intros       | Built with the modified web interface for https://github.com/jumoog/intro-skipper (might work)                            |
 | secondary    | Built with the latest stable release of jellyfin-web and a different app ID to allow having a second account signed in    |
 
 *Disclaimer: I don't have many success stories with TVs older than 2018, but a few people in my Discord server have reported it working for their 2015 and 2016 TVs with the `10.8.z` version*
