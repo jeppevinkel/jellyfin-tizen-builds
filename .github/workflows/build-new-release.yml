@@ -88,7 +88,7 @@ jobs:
             artifact_name: Jellyfin-master-TrueHD
             true_hd: true
             legacy: false
-          - tag: intros
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-intros-TrueHD
             true_hd: true
