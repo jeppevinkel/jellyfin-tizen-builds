@@ -46,6 +46,10 @@ jobs:
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin
             legacy: false
+          - tag: release-10.10.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.10.z
+            legacy: false
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z
@@ -63,6 +67,11 @@ jobs:
             artifact_name: Jellyfin-intros
             legacy: false
             inject_intros: true
+          - tag: release-10.10.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.10.z-intros
+            legacy: false
+            inject_intros: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-intros
@@ -71,6 +80,11 @@ jobs:
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-TrueHD
+            true_hd: true
+            legacy: false
+          - tag: release-10.10.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.10.z-TrueHD
             true_hd: true
             legacy: false
           - tag: release-10.9.z
@@ -105,11 +119,22 @@ jobs:
             legacy: false
             secondary: true
             inject_intros: true
+          - tag: release-10.10.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.10.z-secondary
+            legacy: false
+            secondary: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-secondary
             legacy: false
             secondary: true
+          - tag: release-10.10.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.10.z-secondary-intros
+            legacy: false
+            secondary: true
+            inject_intros: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-secondary-intros
