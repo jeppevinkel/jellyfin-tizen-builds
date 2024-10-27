@@ -146,6 +146,11 @@ jobs:
             artifact_name: Jellyfin-OblongIcon
             legacy: false
             oblong_icon: true
+          - tag: release-10.10.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.10.z-OblongIcon
+            legacy: false
+            oblong_icon: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-OblongIcon
@@ -161,10 +166,11 @@ jobs:
             artifact_name: Jellyfin-master-OblongIcon
             legacy: false
             oblong_icon: true
-          - tag: intros
-            repository: Bobby306/jellyfin-web
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
+            repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-intros-OblongIcon
-            legacy: true
+            legacy: false
+            inject_intros: true
             oblong_icon: true
 
 
