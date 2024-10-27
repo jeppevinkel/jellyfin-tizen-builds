@@ -45,131 +45,94 @@ jobs:
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin
-            legacy: false
           - tag: release-10.10.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.10.z
-            legacy: false
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z
-            legacy: false
-          - tag: release-10.8.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.8.z
-            legacy: true
           - tag: master
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-master
-            legacy: false
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-intros
-            legacy: false
             inject_intros: true
           - tag: release-10.10.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.10.z-intros
-            legacy: false
             inject_intros: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-intros
-            legacy: false
             inject_intros: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-TrueHD
             true_hd: true
-            legacy: false
           - tag: release-10.10.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.10.z-TrueHD
             true_hd: true
-            legacy: false
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-TrueHD
             true_hd: true
-            legacy: false
-          - tag: release-10.8.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.8.z-TrueHD
-            true_hd: true
-            legacy: true
           - tag: master
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-master-TrueHD
             true_hd: true
-            legacy: false
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-intros-TrueHD
             true_hd: true
-            legacy: false
             inject_intros: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-secondary
-            legacy: false
             secondary: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-secondary-intros
-            legacy: false
             secondary: true
             inject_intros: true
           - tag: release-10.10.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.10.z-secondary
-            legacy: false
             secondary: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-secondary
-            legacy: false
             secondary: true
           - tag: release-10.10.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.10.z-secondary-intros
-            legacy: false
             secondary: true
             inject_intros: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-secondary-intros
-            legacy: false
             secondary: true
             inject_intros: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-OblongIcon
-            legacy: false
             oblong_icon: true
           - tag: release-10.10.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.10.z-OblongIcon
-            legacy: false
             oblong_icon: true
           - tag: release-10.9.z
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-10.9.z-OblongIcon
-            legacy: false
-            oblong_icon: true
-          - tag: release-10.8.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.8.z-OblongIcon
-            legacy: true
             oblong_icon: true
           - tag: master
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-master-OblongIcon
-            legacy: false
             oblong_icon: true
           - tag: ${{ github.event.inputs.webReleaseTagName }}
             repository: jellyfin/jellyfin-web
             artifact_name: Jellyfin-intros-OblongIcon
-            legacy: false
             inject_intros: true
             oblong_icon: true
 
