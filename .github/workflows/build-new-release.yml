@@ -141,6 +141,32 @@ jobs:
             legacy: false
             secondary: true
             inject_intros: true
+          - tag: ${{ github.event.inputs.webReleaseTagName }}
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-OblongIcon
+            legacy: false
+            oblong_icon: true
+          - tag: release-10.9.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.9.z-OblongIcon
+            legacy: false
+            oblong_icon: true
+          - tag: release-10.8.z
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-10.8.z-OblongIcon
+            legacy: true
+            oblong_icon: true
+          - tag: master
+            repository: jellyfin/jellyfin-web
+            artifact_name: Jellyfin-master-OblongIcon
+            legacy: false
+            oblong_icon: true
+          - tag: intros
+            repository: Bobby306/jellyfin-web
+            artifact_name: Jellyfin-intros-OblongIcon
+            legacy: true
+            oblong_icon: true
+
 
     steps:
       - run: env
@@ -221,6 +247,10 @@ jobs:
             sed -i 's/<name>Jellyfin<\/name>/<name>Jellyfin 2<\/name>/g' config.xml
             rm icon.png
             mv ../icon2.png icon.png
+          fi
+          if ${{ matrix.oblong_icon == true }}; then
+            rm icon.png
+            mv ../iconoblong.png icon.png
           fi
           
           if ${{ matrix.legacy == true }}; then
