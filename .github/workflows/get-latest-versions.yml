@@ -14,7 +14,7 @@ jobs:
       - name: Store versions to variables
         id: versions
         run: |
-          varNames=("master" "release_10_9_z" "release_10_8_z" "release" "release_10_10_z)
+          varNames=("master" "release_10_9_z" "release_10_8_z" "release" "release_10_10_z")
           idx=0
           if [ -f versions ]; then
             while IFS= read -r line; do
