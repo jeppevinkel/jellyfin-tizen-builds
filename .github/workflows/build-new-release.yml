@@ -206,6 +206,8 @@ jobs:
         id: buildMaster
         run: |
           cd jellyfin-tizen
+          
+          sed -i "s/version=\"0.1.0\"/version=\"$(date +'%Y.%m.%d')\"/g" config.xml
 
           if ${{ matrix.true_hd == true }}; then
             sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
