@@ -30,8 +30,16 @@ jobs:
   run-info:
     name: Show run info
     runs-on: ubuntu-latest
+
+    outputs:
+      date_tag: ${{ steps.variables.outputs.date_tag }}
+      date_pretty: ${{ steps.variables.outputs.date_pretty }}
+      date_pretty_sed: ${{ steps.variables.outputs.date_pretty_sed }}
+      date: ${{ steps.variables.outputs.date }}
+    
     steps:
       - name: Set Variables
+        id: variables
         run: |
           echo "DATE_TAG=$(date +'%Y-%m-%d-%H%M')"
           echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %Hh%M')"
@@ -42,6 +50,11 @@ jobs:
           echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %Hh%M')" >> $GITHUB_ENV
           echo "DATE_PRETTY_SED=$(date +'%Y\/%m\/%d @ %Hh%M')" >> $GITHUB_ENV
           echo "DATE=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_ENV
+
+          echo "date_tag=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+          echo "date_pretty=$(date +'%Y/%m/%d @ %Hh%M')" >> $GITHUB_OUTPUT
+          echo "date_pretty_sed=$(date +'%Y\/%m\/%d @ %Hh%M')" >> $GITHUB_OUTPUT
+          echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
           
       - name: Output Inputs
         run: echo "${{ toJSON(github.event.inputs) }}"
@@ -203,7 +216,7 @@ jobs:
         run: |
           cd jellyfin-web
 
-          sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled $DATE_PRETTY<\/h4>/g" src/controllers/user/menu/index.html
+          sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
           
           if ${{ matrix.legacy == true }}; then
             SKIP_PREPARE=1 npm ci --no-audit
@@ -225,7 +238,7 @@ jobs:
           
           sed -i "s/version=\"0.1.0\"/version=\"$(date +'%Y.%m.%d')\"/g" config.xml
           
-          sed -i "s/appVersion: tizen.application.getCurrentApplication().appInfo.version/appVersion: tizen.application.getCurrentApplication().appInfo.version + \"\\ncompiled ${{ env.DATE_PRETTY_SED }} with ${{ matrix.artifact_name }}\"/g" tizen.js
+          sed -i "s/appVersion: tizen.application.getCurrentApplication().appInfo.version/appVersion: tizen.application.getCurrentApplication().appInfo.version + \"\\ncompiled ${{ needs.run-info.outputs.date_pretty_sed }} with ${{ matrix.artifact_name }}\"/g" tizen.js
 
           if ${{ matrix.true_hd == true }}; then
             sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
@@ -288,7 +301,9 @@ jobs:
   release:
     name: Publish the release
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+    - build
+    - run-info
 
     steps:
       - name: Get current date
@@ -315,8 +330,8 @@ jobs:
       - name: Release Build Result
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: '${{ steps.date.outputs.date_tag }}'
-          name: '${{ steps.date.outputs.date }}'
+          tag_name: '${{ needs.run-info.outputs.date_tag }}'
+          name: '${{ needs.run-info.outputs.date }}'
           files: |
             **/*.wgt
           body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
