@@ -38,10 +38,10 @@ jobs:
           echo "DATE_PRETTY_SED=$(date +'%Y\/%m\/%d @ %Hh%M')"
           echo "DATE=$(date +'%Y-%m-%d %H:%M')"
           
-          echo "DATE_TAG=$(date +'%Y-%m-%d-%H%M')" >> "$GITHUB_ENV"
-          echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %Hh%M')" >> "$GITHUB_ENV"
-          echo "DATE_PRETTY_SED=$(date +'%Y\/%m\/%d @ %Hh%M')" >> "$GITHUB_ENV"
-          echo "DATE=$(date +'%Y-%m-%d %H:%M')" >> "$GITHUB_ENV"
+          echo "DATE_TAG=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
+          echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %Hh%M')" >> $GITHUB_ENV
+          echo "DATE_PRETTY_SED=$(date +'%Y\/%m\/%d @ %Hh%M')" >> $GITHUB_ENV
+          echo "DATE=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_ENV
           
       - name: Output Inputs
         run: echo "${{ toJSON(github.event.inputs) }}"
