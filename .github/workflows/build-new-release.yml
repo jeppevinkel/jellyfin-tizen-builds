@@ -34,9 +34,17 @@ jobs:
       - name: Output Inputs
         run: echo "${{ toJSON(github.event.inputs) }}"
 
+      - name: Define Variables
+        run: |
+          echo "DATE_TAG=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
+          echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %H\h%M')" >> $GITHUB_ENV
+          echo "DATE_PRETTY_SED=$(date +'%Y\\/%m\\/%d @ %H\h%M')" >> $GITHUB_ENV
+          echo "DATE=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_ENV
+
   build:
     name: Build artifacts
     runs-on: ubuntu-latest
+    needs: run-info
     continue-on-error: true
     strategy:
       fail-fast: false
@@ -190,7 +198,7 @@ jobs:
         run: |
           cd jellyfin-web
 
-          sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }}<\/h4>/g" src/controllers/user/menu/index.html
+          sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ env.DATE_PRETTY }}<\/h4>/g" src/controllers/user/menu/index.html
           
           if ${{ matrix.legacy == true }}; then
             SKIP_PREPARE=1 npm ci --no-audit
@@ -211,6 +219,8 @@ jobs:
           cd jellyfin-tizen
           
           sed -i "s/version=\"0.1.0\"/version=\"$(date +'%Y.%m.%d')\"/g" config.xml
+          
+          sed -i "s/appVersion: tizen.application.getCurrentApplication().appInfo.version/appVersion: tizen.application.getCurrentApplication().appInfo.version + \"\\ncompiled ${{ env.DATE_PRETTY_SED }} with ${{ matrix.artifact_name }}\"/g" tizen.js
 
           if ${{ matrix.true_hd == true }}; then
             sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
@@ -300,8 +310,8 @@ jobs:
       - name: Release Build Result
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: '${{ steps.date.outputs.date_tag }}'
-          name: '${{ steps.date.outputs.date }}'
+          tag_name: '${{ env.DATE_TAG }}'
+          name: '${{ env.DATE }}'
           files: |
             **/*.wgt
           body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
