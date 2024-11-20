@@ -31,10 +31,7 @@ jobs:
     name: Show run info
     runs-on: ubuntu-latest
     steps:
-      - name: Output Inputs
-        run: echo "${{ toJSON(github.event.inputs) }}"
-
-      - name: Define Variables
+      - name: Set Variables
         run: |
           echo "DATE_TAG=$(date +'%Y-%m-%d-%H%M')"
           echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %Hh%M')"
@@ -45,6 +42,9 @@ jobs:
           echo "DATE_PRETTY=$(date +'%Y/%m/%d @ %Hh%M')" >> "$GITHUB_ENV"
           echo "DATE_PRETTY_SED=$(date +'%Y\/%m\/%d @ %Hh%M')" >> "$GITHUB_ENV"
           echo "DATE=$(date +'%Y-%m-%d %H:%M')" >> "$GITHUB_ENV"
+          
+      - name: Output Inputs
+        run: echo "${{ toJSON(github.event.inputs) }}"
 
   build:
     name: Build artifacts
