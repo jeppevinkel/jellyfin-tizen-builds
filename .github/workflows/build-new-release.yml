@@ -190,7 +190,7 @@ jobs:
         run: |
           cd jellyfin-web
 
-          sed -i "s/<h2 class="sectionTitle headerUsername" style="padding-left:.25em;"><\/h2>/<h2 class="sectionTitle headerUsername" style="padding-left:.25em;"><\/h2><h4 style="padding-left:.25em;">${{ matrix.artifact_name }}<\/h4>/g" src/controllers/user/menu/index.html
+          sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }}<\/h4>/g" src/controllers/user/menu/index.html
           
           if ${{ matrix.legacy == true }}; then
             SKIP_PREPARE=1 npm ci --no-audit
