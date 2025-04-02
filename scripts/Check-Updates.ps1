@@ -119,6 +119,6 @@ $matrixDefinition.variations | ForEach-Object {
     }
 }
 
-$matrixJson = ($matrix | ConvertTo-Json -Depth 10)
+$matrixJson = ($matrix | ConvertTo-Json -Depth 10 -Compress)
 Write-Host $matrixJson
 Add-Content -Path $Env:GITHUB_OUTPUT -Value "matrix=$matrixJson"
