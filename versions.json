@@ -45,7 +45,7 @@
         {
             "owner": "jellyfin",
             "repo": "jellyfin-web",
-            "latest": "v10.10.6",
+            "latest": "v10.10.5",
             "matrix": true
         }
     ]
