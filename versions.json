@@ -29,6 +29,12 @@
             "repo": "jellyfin-web",
             "ref": "release-10.10.z",
             "latest": "c3c598e1f409b51e5b44cec26bdee6af765d20ef"
+        },
+        {
+            "owner": "jellyfin",
+            "repo": "jellyfin-web",
+            "ref": "master",
+            "latest": ""
         }
     ],
     "releases": [
