@@ -16,6 +16,8 @@ jobs:
         shell: pwsh
         run: |
           ./scripts/Read-Versions.ps1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Store versions to variables
       #   id: versions
       #   run: |
