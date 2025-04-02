@@ -32,8 +32,12 @@ jobs:
       date_pretty: ${{ steps.variables.outputs.date_pretty }}
       date_pretty_sed: ${{ steps.variables.outputs.date_pretty_sed }}
       date: ${{ steps.variables.outputs.date }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     
     steps:
+      - name: Checkout to repository
+        uses: actions/checkout@v4
+
       - name: Set Variables
         id: variables
         run: |
@@ -51,6 +55,10 @@ jobs:
           echo "date_pretty=$(date +'%Y/%m/%d @ %Hh%M')" >> $GITHUB_OUTPUT
           echo "date_pretty_sed=$(date +'%Y\/%m\/%d @ %Hh%M')" >> $GITHUB_OUTPUT
           echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
+      
+      - name: Set matrix data
+        id: set-matrix
+        run: echo "matrix=$(jq -c . < ./matrix.json)" >> $GITHUB_OUTPUT
           
       - name: Output Inputs
         run: echo "${{ toJSON(github.event.inputs) }}"
@@ -62,7 +70,7 @@ jobs:
     continue-on-error: true
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(github.event.inputs.matrix)}}
+      matrix: ${{ fromJson(needs.run-info.outputs.matrix) }}
 
 
     steps:
