@@ -10,7 +10,7 @@
             "owner": "jellyfin",
             "repo": "jellyfin-web",
             "ref": "release-10.9.z",
-            "latest": "6cae5c2646f39f0f63afb204fd12cedf398b80ad"
+            "latest": "5cae5c2646f39f0f63afb204fd12cedf398b80ad"
         },
         {
             "owner": "jellyfin",
