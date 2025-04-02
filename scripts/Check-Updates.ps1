@@ -59,23 +59,61 @@ $matrix = @{
     include = @()
 }
 
+$versions.commits | Where-Object { $_.matrix -eq $true } | ForEach-Object {
+    $commit = $_
+
+    $matrixTask = [pscustomobject]@{
+        tag           = $commit.ref
+        repository    = "jellyfin/jellyfin-web"
+        artifact_name = "Jellyfin-$($commit.name)"
+    }
+
+    $matrix.include += $matrixTask
+}
+
+$versions.releases | Where-Object { $_.matrix -eq $true } | ForEach-Object {
+    $release = $_
+
+    $matrixTask = [pscustomobject]@{
+        tag           = $release.latest
+        repository    = "jellyfin/jellyfin-web"
+        artifact_name = "Jellyfin-$($release.latest)"
+    }
+
+    $matrix.include += $matrixTask
+}
+
 $matrixDefinition.variations | ForEach-Object {
     $variation = $_
 
-    $versions.commits | ForEach-Object {
+    $versions.commits | Where-Object { $_.matrix -eq $true } | ForEach-Object {
         $commit = $_
 
         $matrixTask = [pscustomobject]@{
-            tag = $commit.ref
-            repository = "jellyfin/jellyfin-web"
-            artifact_name = "Jellyfin-$($commit.ref)-$($variation.name)"
+            tag           = $commit.ref
+            repository    = "jellyfin/jellyfin-web"
+            artifact_name = "Jellyfin-$($commit.name)-$($variation.name)"
         }
 
         $variation.extra_values | ForEach-Object {
             $matrixTask | Add-Member -NotePropertyName $_.key -NotePropertyValue $_.value
         }
 
-        Write-Host ($matrixTask | ConvertTo-Json -Depth 10)
+        $matrix.include += $matrixTask
+    }
+
+    $versions.releases | Where-Object { $_.matrix -eq $true } | ForEach-Object {
+        $release = $_
+
+        $matrixTask = [pscustomobject]@{
+            tag           = $release.latest
+            repository    = "jellyfin/jellyfin-web"
+            artifact_name = "Jellyfin-$($release.latest)-$($variation.name)"
+        }
+
+        $variation.extra_values | ForEach-Object {
+            $matrixTask | Add-Member -NotePropertyName $_.key -NotePropertyValue $_.value
+        }
 
         $matrix.include += $matrixTask
     }

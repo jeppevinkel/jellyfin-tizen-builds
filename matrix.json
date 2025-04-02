@@ -19,7 +19,7 @@
             ]
         },
         {
-            "name": "oblong_icon", 
+            "name": "OblongIcon", 
             "extra_values": [
                 {
                     "key": "oblong_icon",
