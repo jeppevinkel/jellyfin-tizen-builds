@@ -18,15 +18,6 @@ jobs:
           ./scripts/Check-Updates.ps1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Do the stuff
-        if: ${{ steps.updates.outputs.triggerBuild == 'true' }}
-        id: doStuff
-        shell: pwsh
-        run: |
-          Write-Host $Env:CAUSE_OF_UPDATE_LABEL
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CAUSE_OF_UPDATE_LABEL: ${{ steps.updates.outputs.causeOfUpdateLabel }}
       # - name: Store versions to variables
       #   id: versions
       #   run: |
