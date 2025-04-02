@@ -6,10 +6,6 @@ on:
 
   workflow_dispatch:
     inputs:
-      matrix:
-        description: 'JSON representation of the build matrix'
-        required: true
-        type: string
       rawMarkdown:
         description: 'Raw markdown for the release description'
         required: false
