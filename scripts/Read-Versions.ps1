@@ -12,7 +12,7 @@ $versions.commits | ForEach-Object {
     }
     $response = Invoke-WebRequest -Uri "https://api.github.com/repos/$($commit.owner)/$($commit.repo)/commits/$($commit.ref)" -Headers $headers
 
-    $response | ConvertTo-Json -Depth 10
+    Write-Host $response | ConvertTo-Json -Depth 10
 
     Write-Host "Checking: $($commit.owner)/$($commit.repo)@$($commit.ref)"
     Write-Host "Stored sha: $($commit.latest)"
