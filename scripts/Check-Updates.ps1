@@ -46,7 +46,7 @@ $versions.releases | ForEach-Object {
 }
 
 if ($updates.Length -gt 0) {
-    $causeOfUpdateLabel += $updates | Join-String -Separator "`n"
+    $causeOfUpdateLabel += $updates | Join-String -Separator "\n"
     Add-Content -Path $Env:GITHUB_OUTPUT -Value "triggerBuild=true"
     Add-Content -Path $Env:GITHUB_OUTPUT -Value "causeOfUpdateLabel=$causeOfUpdateLabel"
 }
