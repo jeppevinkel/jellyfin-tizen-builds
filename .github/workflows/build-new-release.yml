@@ -6,8 +6,8 @@ on:
 
   workflow_dispatch:
     inputs:
-      webReleaseTagName:
-        description: 'The tag name for the jellyfin-web release'
+      matrix:
+        description: 'JSON representation of the build matrix'
         required: true
         type: string
       rawMarkdown:
@@ -66,64 +66,7 @@ jobs:
     continue-on-error: true
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - tag: ${{ github.event.inputs.webReleaseTagName }}
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin
-          - tag: release-10.10.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.10.z
-          - tag: release-10.9.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.9.z
-          - tag: master
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-master
-          - tag: ${{ github.event.inputs.webReleaseTagName }}
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-TrueHD
-            true_hd: true
-          - tag: release-10.10.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.10.z-TrueHD
-            true_hd: true
-          - tag: release-10.9.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.9.z-TrueHD
-            true_hd: true
-          - tag: master
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-master-TrueHD
-            true_hd: true
-          - tag: ${{ github.event.inputs.webReleaseTagName }}
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-secondary
-            secondary: true
-          - tag: release-10.10.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.10.z-secondary
-            secondary: true
-          - tag: release-10.9.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.9.z-secondary
-            secondary: true
-          - tag: ${{ github.event.inputs.webReleaseTagName }}
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-OblongIcon
-            oblong_icon: true
-          - tag: release-10.10.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.10.z-OblongIcon
-            oblong_icon: true
-          - tag: release-10.9.z
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-10.9.z-OblongIcon
-            oblong_icon: true
-          - tag: master
-            repository: jellyfin/jellyfin-web
-            artifact_name: Jellyfin-master-OblongIcon
-            oblong_icon: true
+      matrix: ${{fromJson(github.event.inputs.matrix)}}
 
 
     steps:
@@ -137,29 +80,29 @@ jobs:
         with:
           node-version: '>=20'
           
-      - name: Install Needed packages
-        run: sudo apt install expect
+      # - name: Install Needed packages
+      #   run: sudo apt install expect
       
-      - name: Download Tizen-Studio
-        run: |
-          curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
+      # - name: Download Tizen-Studio
+      #   run: |
+      #     curl -o tizen-installer "https://download.tizen.org/sdk/Installer/tizen-studio_${TIZEN_STUDIO_VER}/web-cli_Tizen_Studio_${TIZEN_STUDIO_VER}_ubuntu-64.bin"
 
-      - name: Install Tizen-Studio
-        run: |
-          chmod +x tizen-installer
-          ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
-          rm ./tizen-installer
-          echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
+      # - name: Install Tizen-Studio
+      #   run: |
+      #     chmod +x tizen-installer
+      #     ./tizen-installer --accept-license "${GITHUB_WORKSPACE}/tizen-studio"
+      #     rm ./tizen-installer
+      #     echo 'export PATH=$PATH:/tizen-studio/tools/ide/bin' >> .bashrc
           
-      - name: Prepare Tizen Certificate
-        run: |
-          # echo $CERTIFICATE_CONTENT > "${GITHUB_WORKSPACE}/tizencert.p12"
-          # ./tizen-studio/tools/ide/bin/tizen certificate -a Jellyfin -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Jellyfin -e jellyfin@example.org -f tizencert
-          ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizencert.p12" -p 1234
-          ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
-          chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
-        env:
-          CERTIFICATE_CONTENT: ${{ secrets.TIZEN_CERT }}
+      # - name: Prepare Tizen Certificate
+      #   run: |
+      #     # echo $CERTIFICATE_CONTENT > "${GITHUB_WORKSPACE}/tizencert.p12"
+      #     # ./tizen-studio/tools/ide/bin/tizen certificate -a Jellyfin -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Jellyfin -e jellyfin@example.org -f tizencert
+      #     ./tizen-studio/tools/ide/bin/tizen security-profiles add -n Jellyfin -a "${GITHUB_WORKSPACE}/tizencert.p12" -p 1234
+      #     ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+      #     chmod 755 "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+      #   env:
+      #     CERTIFICATE_CONTENT: ${{ secrets.TIZEN_CERT }}
     
       - name: Clone jellyfin-tizen
         uses: actions/checkout@v4
@@ -175,121 +118,121 @@ jobs:
           path: 'jellyfin-web'
           ref: ${{ matrix.tag }}
           
-      - name: Build jellyfin-web
-        run: |
-          cd jellyfin-web
+  #     - name: Build jellyfin-web
+  #       run: |
+  #         cd jellyfin-web
 
-          sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
+  #         sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
           
-          if ${{ matrix.legacy == true }}; then
-            SKIP_PREPARE=1 npm ci --no-audit
-            npm run build:production
-          else
-            npm ci --no-audit
-            USE_SYSTEM_FONTS=1 npm run build:production
-          fi
+  #         if ${{ matrix.legacy == true }}; then
+  #           SKIP_PREPARE=1 npm ci --no-audit
+  #           npm run build:production
+  #         else
+  #           npm ci --no-audit
+  #           USE_SYSTEM_FONTS=1 npm run build:production
+  #         fi
 
-      - name: Build jellyfin-tizen
-        id: buildMaster
-        run: |
-          cd jellyfin-tizen
+  #     - name: Build jellyfin-tizen
+  #       id: buildMaster
+  #       run: |
+  #         cd jellyfin-tizen
           
-          sed -i "s/appVersion: tizen.application.getCurrentApplication().appInfo.version/appVersion: tizen.application.getCurrentApplication().appInfo.version + \" compiled ${{ needs.run-info.outputs.date_pretty_sed }} with ${{ matrix.artifact_name }}\"/g" tizen.js
+  #         sed -i "s/appVersion: tizen.application.getCurrentApplication().appInfo.version/appVersion: tizen.application.getCurrentApplication().appInfo.version + \" compiled ${{ needs.run-info.outputs.date_pretty_sed }} with ${{ matrix.artifact_name }}\"/g" tizen.js
 
-          if ${{ matrix.true_hd == true }}; then
-            sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
-          fi
+  #         if ${{ matrix.true_hd == true }}; then
+  #           sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
+  #         fi
           
-          if ${{ matrix.secondary == true }}; then
-            sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
-            sed -i 's/<name>Jellyfin<\/name>/<name>Jellyfin 2<\/name>/g' config.xml
-            rm icon.png
-            mv ../icon2.png icon.png
-          fi
-          if ${{ matrix.oblong_icon == true }}; then
-            rm icon.png
-            mv ../iconoblong.png icon.png
-          fi
+  #         if ${{ matrix.secondary == true }}; then
+  #           sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
+  #           sed -i 's/<name>Jellyfin<\/name>/<name>Jellyfin 2<\/name>/g' config.xml
+  #           rm icon.png
+  #           mv ../icon2.png icon.png
+  #         fi
+  #         if ${{ matrix.oblong_icon == true }}; then
+  #           rm icon.png
+  #           mv ../iconoblong.png icon.png
+  #         fi
           
-          if ${{ matrix.legacy == true }}; then
-            DISCARD_UNUSED_FONTS=1 JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
-          else
-            JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
-          fi
+  #         if ${{ matrix.legacy == true }}; then
+  #           DISCARD_UNUSED_FONTS=1 JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+  #         else
+  #           JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
+  #         fi
 
-      - name: Build Package
-        if: success() || steps.buildMaster.conclusion == 'success'
-        run: |
-          cd jellyfin-tizen
-          ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+  #     - name: Build Package
+  #       if: success() || steps.buildMaster.conclusion == 'success'
+  #       run: |
+  #         cd jellyfin-tizen
+  #         ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
           
-      - name: Prepare for password prompt
-        if: success() || steps.buildMaster.conclusion == 'success'
-        run: |
-          sed -i "s|${GITHUB_WORKSPACE}/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
-          sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+  #     - name: Prepare for password prompt
+  #       if: success() || steps.buildMaster.conclusion == 'success'
+  #       run: |
+  #         sed -i "s|${GITHUB_WORKSPACE}/tizencert.pwd|1234|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+  #         sed -i "s|${GITHUB_WORKSPACE}/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|g" ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
+  #         sed -i 's|password=""|password="tizenpkcs12passfordsigner"|g' ${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml
           
-      - name: Package WGT
-        if: success() || steps.buildMaster.conclusion == 'success'
-        run: |
-          expect ./package.exp
-          if ${{ matrix.artifact_name != 'Jellyfin' }}; then
+  #     - name: Package WGT
+  #       if: success() || steps.buildMaster.conclusion == 'success'
+  #       run: |
+  #         expect ./package.exp
+  #         if ${{ matrix.artifact_name != 'Jellyfin' }}; then
 
-            if ${{ matrix.secondary == true }}; then
-              mv "./jellyfin-tizen/release/Jellyfin 2.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
-            else
-              mv "./jellyfin-tizen/release/Jellyfin.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
-            fi
-          fi
+  #           if ${{ matrix.secondary == true }}; then
+  #             mv "./jellyfin-tizen/release/Jellyfin 2.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
+  #           else
+  #             mv "./jellyfin-tizen/release/Jellyfin.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
+  #           fi
+  #         fi
           
-      - name: Print logs
-        if: always()
-        run: cat ./tizen-studio-data/cli/logs/cli.log
+  #     - name: Print logs
+  #       if: always()
+  #       run: cat ./tizen-studio-data/cli/logs/cli.log
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.artifact_name }}
-          path: jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
-          retention-days: 5
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ matrix.artifact_name }}
+  #         path: jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
+  #         retention-days: 5
 
-  release:
-    name: Publish the release
-    runs-on: ubuntu-latest
-    needs:
-    - build
-    - run-info
+  # release:
+  #   name: Publish the release
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #   - build
+  #   - run-info
 
-    steps:
-      - name: Get current date
-        id: date
-        run: |
-          echo "date_tag=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
-          echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
+  #   steps:
+  #     - name: Get current date
+  #       id: date
+  #       run: |
+  #         echo "date_tag=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+  #         echo "date=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
 
-      - name: Download all workflow run artifacts
-        uses: actions/download-artifact@v4
+  #     - name: Download all workflow run artifacts
+  #       uses: actions/download-artifact@v4
 
-      - name: List all directories
-        run: ls
+  #     - name: List all directories
+  #       run: ls
 
-      - name: Check if any artifacts exists
-        shell: bash
-        run: |
-          count=$(find . -type f -name '*.wgt' -printf x | wc -c)
-          if [ $count -le 0 ]; then
-            echo "::error title=NoWGT::No wgt files were built"
-            exit 1
-          fi
+  #     - name: Check if any artifacts exists
+  #       shell: bash
+  #       run: |
+  #         count=$(find . -type f -name '*.wgt' -printf x | wc -c)
+  #         if [ $count -le 0 ]; then
+  #           echo "::error title=NoWGT::No wgt files were built"
+  #           exit 1
+  #         fi
 
-      - name: Release Build Result
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: '${{ needs.run-info.outputs.date_tag }}'
-          name: '${{ needs.run-info.outputs.date }}'
-          files: |
-            **/*.wgt
-          body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
-          prerelease: ${{ github.event.inputs.prerelease }}
+  #     - name: Release Build Result
+  #       uses: softprops/action-gh-release@v2
+  #       with:
+  #         tag_name: '${{ needs.run-info.outputs.date_tag }}'
+  #         name: '${{ needs.run-info.outputs.date }}'
+  #         files: |
+  #           **/*.wgt
+  #         body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+  #         prerelease: ${{ github.event.inputs.prerelease }}
 

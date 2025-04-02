@@ -149,9 +149,9 @@ jobs:
       #     else
       #       echo "shouldUpdate=false" >> $GITHUB_OUTPUT
       #     fi
-      # - name: Trigger build workflow
-      #   if: ${{ steps.diffcheck.outputs.shouldUpdate == 'true' }}
-      #   uses: benc-uk/workflow-dispatch@v1
-      #   with:
-      #     workflow: build-new-release.yml
-      #     inputs: '{"webReleaseTagName": "${{ steps.last_web_release.outputs.tag_name }}", "rawMarkdown": "${{ steps.diffcheck.outputs.causeOfUpdateLabel }}"}'
+      - name: Trigger build workflow
+        if: ${{ steps.updates.outputs.triggerBuild == 'true' }}
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: build-new-release.yml
+          inputs: '{"matrix": "${{ steps.updates.outputs.matrix }}", "rawMarkdown": "${{ steps.updates.outputs.causeOfUpdateLabel }}"}'
