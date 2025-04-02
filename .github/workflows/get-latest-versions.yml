@@ -154,4 +154,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-new-release.yml
-          inputs: '{"matrix": "${{ steps.updates.outputs.matrix }}", "rawMarkdown": "${{ steps.updates.outputs.causeOfUpdateLabel }}"}'
+          inputs: '{"matrix": "${{ toJson(steps.updates.outputs.matrix) }}", "rawMarkdown": "${{ steps.updates.outputs.causeOfUpdateLabel }}"}'
