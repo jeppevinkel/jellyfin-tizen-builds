@@ -36,6 +36,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-TrueHD",
+      "modern": true,
       "true_hd": true
     },
     {
@@ -60,6 +61,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-secondary",
+      "modern": true,
       "secondary": true
     },
     {
@@ -84,6 +86,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-OblongIcon",
+      "modern": true,
       "oblong_icon": true
     },
     {
