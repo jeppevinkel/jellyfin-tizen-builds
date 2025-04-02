@@ -15,7 +15,7 @@ $versions.commits | ForEach-Object {
     $newCommits = $commit.latest -ne $response.sha
 
     Write-Host "Checking: $($commit.owner)/$($commit.repo)@$($commit.ref)"
-    Write-Host "Updates:  $($commit.latest -eq $response.sha)\n"
+    Write-Host "Updates:  $($commit.latest -eq $response.sha)`n"
 
     $commit.latest = $response.sha
 
@@ -36,17 +36,17 @@ $versions.releases | ForEach-Object {
     $newRelease = $release.latest -ne $response.tag_name
 
     Write-Host "Checking: $($release.owner)/$($release.repo)@latest"
-    Write-Host "Updates:  $($release.latest -eq $response.tag_name)\n"
+    Write-Host "Updates:  $($release.latest -eq $response.tag_name)`n"
 
     $release.latest = $response.tag_name
 
     if ($newRelease) {
-        $updates += "New $($release.repo) release\n"
+        $updates += "New $($release.repo) release"
     }
 }
 
 if ($updates.Length -gt 0) {
-    $causeOfUpdateLabel += $updates | Join-String -Separator '\n'
+    $causeOfUpdateLabel += $updates | Join-String -Separator "`n"
     Add-Content -Path $Env:GITHUB_OUTPUT -Value "triggerBuild=true"
     Add-Content -Path $Env:GITHUB_OUTPUT -Value "causeOfUpdateLabel=$causeOfUpdateLabel"
 }
