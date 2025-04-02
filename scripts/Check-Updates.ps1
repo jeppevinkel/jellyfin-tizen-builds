@@ -71,9 +71,13 @@ $matrixDefinition.variations | ForEach-Object {
             artifact_name = "Jellyfin-$($commit.ref)-$($variation.name)"
         }
 
+        Write-Host $matrixTask | ConvertTo-Json -Depth 10
+
         $variation.extra_values | ForEach-Object {
             $matrixTask | Add-Member -NotePropertyName $_.key -NotePropertyValue $_.value
         }
+
+        Write-Host $matrixTask | ConvertTo-Json -Depth 10
 
         $matrix.include += $matrixTask
     }
