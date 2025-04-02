@@ -1,0 +1,31 @@
+{
+    "variations": [
+        {
+            "name": "TrueHD", 
+            "extra_values": [
+                {
+                    "key": "true_hd",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "name": "secondary", 
+            "extra_values": [
+                {
+                    "key": "secondary",
+                    "value": true
+                }
+            ]
+        },
+        {
+            "name": "OblongIcon", 
+            "extra_values": [
+                {
+                    "key": "oblong_icon",
+                    "value": true
+                }
+            ]
+        }
+    ]
+  }

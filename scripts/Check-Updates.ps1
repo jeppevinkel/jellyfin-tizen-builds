@@ -54,7 +54,9 @@ else {
     Add-Content -Path $Env:GITHUB_OUTPUT -Value "triggerBuild=false"
 }
 
-$matrixDefinition = Get-Content -Path ./matrix.json | ConvertFrom-Json
+$versions | ConvertTo-Json -Depth 10 | Out-File -Force -FilePath .\versions.json
+
+$matrixDefinition = Get-Content -Path ./matrix-definition.json | ConvertFrom-Json
 $matrix = @{
     include = @()
 }
@@ -119,6 +121,6 @@ $matrixDefinition.variations | ForEach-Object {
     }
 }
 
-$matrixJson = ($matrix | ConvertTo-Json -Depth 10 -Compress)
+$matrixJson = ($matrix | ConvertTo-Json -Depth 10)
 Write-Host $matrixJson
-Add-Content -Path $Env:GITHUB_OUTPUT -Value "matrix=$matrixJson"
+$matrixJson | Out-File -Force -FilePath .\matrix.json
