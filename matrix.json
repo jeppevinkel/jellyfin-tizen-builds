@@ -13,7 +13,8 @@
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-master"
+      "artifact_name": "Jellyfin-master",
+      "modern": true
     },
     {
       "tag": "v10.10.6",
