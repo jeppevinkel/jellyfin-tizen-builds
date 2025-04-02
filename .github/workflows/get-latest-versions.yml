@@ -11,13 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Store versions to variables
-        id: versions
+      - name: Check for updates
+        id: updates
         shell: pwsh
         run: |
-          ./scripts/Read-Versions.ps1
+          ./scripts/Check-Updates.ps1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Do the stuff
+        if: ${{ steps.updates.outputs.triggerBuild == 'true' }}
+        id: doStuff
+        shell: pwsh
+        run: |
+          Write-Host $Env:CAUSE_OF_UPDATE_LABEL
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CAUSE_OF_UPDATE_LABEL: ${{ steps.updates.outputs.causeOfUpdateLabel }}
       # - name: Store versions to variables
       #   id: versions
       #   run: |
