@@ -19,14 +19,6 @@
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "ref": "release-10.8.z",
-      "name": "10.8.z",
-      "matrix": false,
-      "latest": "8e37078b6066715b27fd2dde1f7d1eda216044d9"
-    },
-    {
-      "owner": "jellyfin",
-      "repo": "jellyfin-web",
       "ref": "release-10.10.z",
       "name": "10.10.z",
       "matrix": true,
