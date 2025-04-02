@@ -65,7 +65,7 @@ $matrixDefinition.variations | ForEach-Object {
     $versions.commits | ForEach-Object {
         $commit = $_
 
-        $matrixTask = @{
+        $matrixTask = [pscustomobject]@{
             tag = $commit.ref
             repository = "jellyfin/jellyfin-web"
             artifact_name = "Jellyfin-$($commit.ref)-$($variation.name)"
