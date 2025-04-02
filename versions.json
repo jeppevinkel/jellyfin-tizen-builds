@@ -4,36 +4,40 @@
             "owner": "jellyfin",
             "repo": "jellyfin-tizen",
             "ref": "master",
+            "name": "master",
+            "matrix": false,
             "latest": "5760c2c7deb7a892f7faf8c25600875737e5b879"
         },
         {
             "owner": "jellyfin",
             "repo": "jellyfin-web",
             "ref": "release-10.9.z",
+            "name": "10.9.z",
+            "matrix": true,
             "latest": "5cae5c2646f39f0f63afb204fd12cedf398b80ad"
         },
         {
             "owner": "jellyfin",
             "repo": "jellyfin-web",
             "ref": "release-10.8.z",
+            "name": "10.8.z",
+            "matrix": true,
             "latest": "8e37078b6066715b27fd2dde1f7d1eda216044d9"
         },
         {
             "owner": "jellyfin",
             "repo": "jellyfin-web",
             "ref": "release-10.10.z",
-            "latest": "c3c598e1f409b51e5b44cec26bdee6af765d20ef"
-        },
-        {
-            "owner": "jellyfin",
-            "repo": "jellyfin-web",
-            "ref": "release-10.10.z",
+            "name": "10.10.z",
+            "matrix": true,
             "latest": "c3c598e1f409b51e5b44cec26bdee6af765d20ef"
         },
         {
             "owner": "jellyfin",
             "repo": "jellyfin-web",
             "ref": "master",
+            "name": "master",
+            "matrix": true,
             "latest": ""
         }
     ],
@@ -41,7 +45,9 @@
         {
             "owner": "jellyfin",
             "repo": "jellyfin-web",
-            "latest": "v10.10.6"
+            "latest": "v10.10.6",
+            "name": "",
+            "matrix": true
         }
     ]
 }
