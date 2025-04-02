@@ -10,9 +10,7 @@ $versions.commits | ForEach-Object {
         "Authorization"        = "Bearer $Env:GITHUB_TOKEN"
         "X-GitHub-Api-Version" = "2022-11-28"
     }
-    $response = Invoke-WebRequest -Uri "https://api.github.com/repos/$($commit.owner)/$($commit.repo)/commits/$($commit.ref)" -Headers $headers
-
-    Write-Host $response | ConvertTo-Json -Depth 10
+    $response = Invoke-RestMethod -Uri "https://api.github.com/repos/$($commit.owner)/$($commit.repo)/commits/$($commit.ref)" -Headers $headers
 
     Write-Host "Checking: $($commit.owner)/$($commit.repo)@$($commit.ref)"
     Write-Host "Stored sha: $($commit.latest)"
