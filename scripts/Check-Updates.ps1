@@ -70,6 +70,10 @@ $versions.commits | Where-Object { $_.matrix -eq $true } | ForEach-Object {
         artifact_name = "Jellyfin-$($commit.name)"
     }
 
+    if ($commit.modern -eq $true) {
+        $matrixTask | Add-Member -NotePropertyName "modern" -NotePropertyValue $true
+    }
+
     $matrix.include += $matrixTask
 }
 
