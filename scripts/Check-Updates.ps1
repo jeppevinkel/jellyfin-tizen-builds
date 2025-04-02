@@ -97,6 +97,10 @@ $matrixDefinition.variations | ForEach-Object {
             artifact_name = "Jellyfin-$($commit.name)-$($variation.name)"
         }
 
+        if ($commit.modern -eq $true) {
+            $matrixTask | Add-Member -NotePropertyName "modern" -NotePropertyValue $true
+        }
+
         $variation.extra_values | ForEach-Object {
             $matrixTask | Add-Member -NotePropertyName $_.key -NotePropertyValue $_.value
         }
