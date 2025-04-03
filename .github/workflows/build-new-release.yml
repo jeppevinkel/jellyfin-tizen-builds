@@ -61,9 +61,12 @@ jobs:
         run: echo "matrix=$(jq -c . < ./matrix.json)" >> $GITHUB_OUTPUT
           
       - name: Output Inputs
-        run: echo $INPUTS_JSON
+        run: |
+          echo $INPUTS_JSON
+          echo $BUILD_REASON >> $GITHUB_STEP_SUMMARY
         env:
           INPUTS_JSON: ${{ toJSON(github.event.inputs) }}
+          BUILD_REASON: ${{ github.event.inputs.rawMarkdown }}
 
   build:
     name: Build artifacts
