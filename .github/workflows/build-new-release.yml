@@ -61,7 +61,9 @@ jobs:
         run: echo "matrix=$(jq -c . < ./matrix.json)" >> $GITHUB_OUTPUT
           
       - name: Output Inputs
-        run: echo "${{ toJSON(github.event.inputs) }}"
+        run: echo $INPUTS_JSON
+        env:
+          INPUTS_JSON: ${{ toJSON(github.event.inputs) }}
 
   build:
     name: Build artifacts
