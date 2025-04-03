@@ -20,7 +20,7 @@ $versions.commits | ForEach-Object {
     $commit.latest = $response.sha
 
     if ($newCommits) {
-        $updates += "New commit to $($commit.ref) https://github.com/$($commit.owner)/$($commit.repo)/commit/$($commit.latest)\n\>$($response.commit.message | ConvertTo-Json)"
+        $updates += "New commit to $($commit.ref) https://github.com/$($commit.owner)/$($commit.repo)/commit/$($commit.latest)\n\>$($response.commit.message.replace("`n", "\n"))"
     }
 }
 
