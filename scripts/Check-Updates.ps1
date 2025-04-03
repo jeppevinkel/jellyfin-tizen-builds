@@ -20,6 +20,7 @@ $versions.commits | ForEach-Object {
     $commit.latest = $response.sha
 
     if ($newCommits) {
+        Write-Host "$($response.commit.message)"
         $updates += "New commit to $($commit.ref) https://github.com/$($commit.owner)/$($commit.repo)/commit/$($commit.latest)\n\>$($response.commit.message)"
     }
 }
