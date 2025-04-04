@@ -11,6 +11,10 @@ on:
         required: false
         default: ''
         type: string
+      webReleaseTagName:
+        description: 'The tag of the default release version'
+        required: true
+        type: string
       prerelease:
         description: 'Set if the release should be marked as a prerelease'
         required: false
