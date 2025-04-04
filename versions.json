@@ -6,7 +6,7 @@
       "ref": "master",
       "name": "master",
       "matrix": false,
-      "latest": "5760c2c7deb7a892f7faf8c25600875737e5b879"
+      "latest": ""
     },
     {
       "owner": "jellyfin",
