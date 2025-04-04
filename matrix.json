@@ -19,7 +19,7 @@
     {
       "tag": "v10.10.6",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-v10.10.6"
+      "artifact_name": "Jellyfin"
     },
     {
       "tag": "release-10.9.z",
@@ -43,7 +43,7 @@
     {
       "tag": "v10.10.6",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-v10.10.6-TrueHD",
+      "artifact_name": "Jellyfin-TrueHD",
       "true_hd": true
     },
     {
@@ -68,7 +68,7 @@
     {
       "tag": "v10.10.6",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-v10.10.6-secondary",
+      "artifact_name": "Jellyfin-secondary",
       "secondary": true
     },
     {
@@ -93,7 +93,7 @@
     {
       "tag": "v10.10.6",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-v10.10.6-OblongIcon",
+      "artifact_name": "Jellyfin-OblongIcon",
       "oblong_icon": true
     }
   ]
