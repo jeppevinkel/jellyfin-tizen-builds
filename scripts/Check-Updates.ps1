@@ -80,10 +80,18 @@ $versions.commits | Where-Object { $_.matrix -eq $true } | ForEach-Object {
 $versions.releases | Where-Object { $_.matrix -eq $true } | ForEach-Object {
     $release = $_
 
-    $matrixTask = [pscustomobject]@{
-        tag           = $release.latest
-        repository    = "jellyfin/jellyfin-web"
-        artifact_name = "Jellyfin-$($release.latest)"
+    if ($release.default -eq $true) {
+        $matrixTask = [pscustomobject]@{
+            tag           = $release.latest
+            repository    = "jellyfin/jellyfin-web"
+            artifact_name = "Jellyfin"
+        }
+    } else {
+        $matrixTask = [pscustomobject]@{
+            tag           = $release.latest
+            repository    = "jellyfin/jellyfin-web"
+            artifact_name = "Jellyfin-$($release.latest)"
+        }
     }
 
     $matrix.include += $matrixTask
@@ -115,10 +123,18 @@ $matrixDefinition.variations | ForEach-Object {
     $versions.releases | Where-Object { $_.matrix -eq $true } | ForEach-Object {
         $release = $_
 
-        $matrixTask = [pscustomobject]@{
-            tag           = $release.latest
-            repository    = "jellyfin/jellyfin-web"
-            artifact_name = "Jellyfin-$($release.latest)-$($variation.name)"
+        if ($release.default -eq $true) {
+            $matrixTask = [pscustomobject]@{
+                tag           = $release.latest
+                repository    = "jellyfin/jellyfin-web"
+                artifact_name = "Jellyfin-$($variation.name)"
+            }
+        } else {
+            $matrixTask = [pscustomobject]@{
+                tag           = $release.latest
+                repository    = "jellyfin/jellyfin-web"
+                artifact_name = "Jellyfin-$($release.latest)-$($variation.name)"
+            }
         }
 
         $variation.extra_values | ForEach-Object {
