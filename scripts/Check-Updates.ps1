@@ -86,6 +86,7 @@ $versions.releases | Where-Object { $_.matrix -eq $true } | ForEach-Object {
             repository    = "jellyfin/jellyfin-web"
             artifact_name = "Jellyfin"
         }
+        Add-Content -Path $Env:GITHUB_OUTPUT -Value "webReleaseTagName=$($release.latest)"
     } else {
         $matrixTask = [pscustomobject]@{
             tag           = $release.latest
