@@ -26,6 +26,15 @@
                     "value": true
                 }
             ]
+        },
+        {
+            "name": "GrayFix", 
+            "extra_values": [
+                {
+                    "key": "gray_fix",
+                    "value": true
+                }
+            ]
         }
     ]
   }

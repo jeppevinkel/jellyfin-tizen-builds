@@ -140,6 +140,10 @@ jobs:
           else
             sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
           fi
+
+          if ${{ matrix.gray_fix == true }}; then
+            sed -i 's/background: #000 !important;/background: transparent !important;/g' src/plugins/htmlVideoPlayer/style.scss
+          fi
           
           if ${{ matrix.legacy == true }}; then
             SKIP_PREPARE=1 npm ci --no-audit
