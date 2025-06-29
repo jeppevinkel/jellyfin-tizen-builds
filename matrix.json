@@ -95,6 +95,31 @@
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-OblongIcon",
       "oblong_icon": true
+    },
+    {
+      "tag": "release-10.9.z",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-10.9.z-GrayFix",
+      "gray_fix": true
+    },
+    {
+      "tag": "release-10.10.z",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-10.10.z-GrayFix",
+      "gray_fix": true
+    },
+    {
+      "tag": "master",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-master-GrayFix",
+      "modern": true,
+      "gray_fix": true
+    },
+    {
+      "tag": "v10.10.7",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-GrayFix",
+      "gray_fix": true
     }
   ]
 }
