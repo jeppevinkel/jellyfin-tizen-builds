@@ -31,7 +31,7 @@
       "name": "master",
       "matrix": true,
       "modern": true,
-      "latest": "b979240a9fcecce49c29d8a600bea591832db777"
+      "latest": "6316bdb53bfd1548bf8742e5c48d1f009e3dcfa9"
     }
   ],
   "releases": [
