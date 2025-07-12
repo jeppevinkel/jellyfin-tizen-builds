@@ -53,3 +53,55 @@ This should only happen if you already have a version installed using a differen
 This can be solved by uninstalling the app prior to attempting to install this version.
 
 Removing it from the app bar is not the same as removing it from the device, you need to actually go into the applications menu and remove it from there.
+
+
+### Where do I find `sdb`?
+
+If you installed Tizen Studio with CLI correctly, then you should find the `sdb` tool: 
+
+On Windows
+```bash
+c:\tizen-studio\tools\sdb
+```
+
+On Mac
+```bash
+$HOME/tizen-studio/tools/sdb
+```
+
+On Linux
+```bash
+~/tizen-studio/tools/sdb
+```
+
+### The `sdb devices` command returns only this message "List of devices attached":
+
+If you enabled developer mode on your TV correctly, then you need to do the following:
+
+- Make sure the TV and the computer running the Tizen Studio with CLI are connected to the same network (for example, the same Wi-Fi)
+- Discover the IP address of your TV. You can check the IP of your TV in the Settings > General > Network > Network Status > IP Settings. Or check this depending of your TV model (https://www.samsung.com/ca/support/tv-audio-video/verify-network-status-on-your-samsung-tv/)
+
+Once you have the IP address of your TV connect to it by running this command:
+
+On Windows
+```bash
+c:\tizen-studio\tools\sdb connect <IP of your TV>
+```
+
+On Mac
+```bash
+$HOME/tizen-studio/tools/sdb connect <IP of your TV>
+```
+
+On Linux
+```bash
+~/tizen-studio/tools/sdb connect <IP of your TV>
+```
+
+You should see a message like:
+```bash
+connecting to <IP of your TV>:26101 ...
+connected to <IP of your TV>:26101
+```
+
+If you execute `sdb devices` you should now see your TV in the list, including the name used in the "Deploy to TV" section.
