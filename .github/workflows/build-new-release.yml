@@ -144,6 +144,8 @@ jobs:
           if ${{ matrix.gray_fix == true }}; then
             sed -i 's/background: #000 !important;/background: transparent !important;/g' src/plugins/htmlVideoPlayer/style.scss
           fi
+
+          sed -i 's/'if (canPlayVp9)/if (false)/g' src/scripts/browserDeviceProfile.js
           
           if ${{ matrix.legacy == true }}; then
             SKIP_PREPARE=1 npm ci --no-audit
