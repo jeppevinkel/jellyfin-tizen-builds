@@ -91,7 +91,7 @@ jobs:
       - run: env
       
       - name: 'Checkout'
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
