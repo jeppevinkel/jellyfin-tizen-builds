@@ -22,6 +22,11 @@
       "artifact_name": "Jellyfin"
     },
     {
+      "tag": "v10.11.0-rc2",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-prerelease"
+    },
+    {
       "tag": "release-10.9.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.9.z-TrueHD",
@@ -44,6 +49,12 @@
       "tag": "v10.10.7",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-TrueHD",
+      "true_hd": true
+    },
+    {
+      "tag": "v10.11.0-rc2",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-prerelease-TrueHD",
       "true_hd": true
     },
     {
@@ -72,6 +83,12 @@
       "secondary": true
     },
     {
+      "tag": "v10.11.0-rc2",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-prerelease-secondary",
+      "secondary": true
+    },
+    {
       "tag": "release-10.9.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.9.z-OblongIcon",
@@ -97,6 +114,12 @@
       "oblong_icon": true
     },
     {
+      "tag": "v10.11.0-rc2",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-prerelease-OblongIcon",
+      "oblong_icon": true
+    },
+    {
       "tag": "release-10.9.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.9.z-GrayFix",
@@ -119,6 +142,12 @@
       "tag": "v10.10.7",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-GrayFix",
+      "gray_fix": true
+    },
+    {
+      "tag": "v10.11.0-rc2",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-prerelease-GrayFix",
       "gray_fix": true
     }
   ]
