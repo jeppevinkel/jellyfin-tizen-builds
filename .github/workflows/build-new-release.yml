@@ -15,6 +15,10 @@ on:
         description: 'The tag of the default release version'
         required: true
         type: string
+      webPrereleaseTagName:
+        description: 'The tag of the default prerelease version'
+        required: true
+        type: string
       prerelease:
         description: 'Set if the release should be marked as a prerelease'
         required: false
@@ -254,6 +258,6 @@ jobs:
           name: '${{ needs.run-info.outputs.date }}'
           files: |
             **/*.wgt
-          body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
+          body: "${{ github.event.inputs.rawMarkdown }}\n\nLook at the [readme](https://github.com/jeppevinkel/jellyfin-tizen-builds/blob/master/README.md) for information about the different versions.\n## Normal Version\nJellyfin-Web: [${{ github.event.inputs.webReleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webReleaseTagName }})  \n\n## Pre-release Version\nJellyfin-Web: [${{ github.event.inputs.webPrereleaseTagName }}](https://github.com/jellyfin/jellyfin-web/releases/tag/${{ github.event.inputs.webPrereleaseTagName }})  \n## 10.9.z Version\nJellyfin-web: [release-10.9.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.9.z)  \n## 10.8.z Version\nJellyfin-web: [release-10.8.z](https://github.com/jellyfin/jellyfin-web/tree/release-10.8.z)  \n## Master Version\nJellyfin-web: [master](https://github.com/jellyfin/jellyfin-web)"
           prerelease: ${{ github.event.inputs.prerelease }}
 

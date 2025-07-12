@@ -33,4 +33,4 @@ jobs:
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: build-new-release.yml
-          inputs: '{"rawMarkdown": "${{ steps.updates.outputs.causeOfUpdateLabel }}", "webReleaseTagName": "${{ steps.updates.outputs.webReleaseTagName }}"}'
+          inputs: '{"rawMarkdown": "${{ steps.updates.outputs.causeOfUpdateLabel }}", "webReleaseTagName": "${{ steps.updates.outputs.webReleaseTagName }}", "webPrereleaseTagName": "${{ steps.updates.outputs.webPrereleaseTagName }}"}'
