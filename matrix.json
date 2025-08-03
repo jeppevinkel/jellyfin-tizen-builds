@@ -22,7 +22,7 @@
       "artifact_name": "Jellyfin"
     },
     {
-      "tag": "v10.11.0-rc3",
+      "tag": "v10.11.0-rc4",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease"
     },
@@ -52,7 +52,7 @@
       "true_hd": true
     },
     {
-      "tag": "v10.11.0-rc3",
+      "tag": "v10.11.0-rc4",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-TrueHD",
       "true_hd": true
@@ -83,7 +83,7 @@
       "secondary": true
     },
     {
-      "tag": "v10.11.0-rc3",
+      "tag": "v10.11.0-rc4",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-secondary",
       "secondary": true
@@ -114,7 +114,7 @@
       "oblong_icon": true
     },
     {
-      "tag": "v10.11.0-rc3",
+      "tag": "v10.11.0-rc4",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-OblongIcon",
       "oblong_icon": true
@@ -145,7 +145,7 @@
       "gray_fix": true
     },
     {
-      "tag": "v10.11.0-rc3",
+      "tag": "v10.11.0-rc4",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-GrayFix",
       "gray_fix": true
