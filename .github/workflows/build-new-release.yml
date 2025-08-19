@@ -44,7 +44,7 @@ jobs:
     
     steps:
       - name: Checkout to repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set Variables
         id: variables
@@ -91,7 +91,7 @@ jobs:
       - run: env
       
       - name: 'Checkout'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
@@ -123,14 +123,14 @@ jobs:
           CERTIFICATE_CONTENT: ${{ secrets.TIZEN_CERT }}
     
       - name: Clone jellyfin-tizen
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: 'jellyfin/jellyfin-tizen'
           path: 'jellyfin-tizen'
           ref: ${{ matrix.legacy == true && '8ebbd10643c10033223d6bf1d7fd7d59fba28fe1' || 'master' }}
           
       - name: Clone jellyfin-web
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ matrix.repository }}
           path: 'jellyfin-web'
