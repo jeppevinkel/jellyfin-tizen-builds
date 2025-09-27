@@ -31,7 +31,7 @@
       "name": "master",
       "matrix": true,
       "modern": true,
-      "latest": "966e69354a6a0fceb8df57e8149a672ef083ee22"
+      "latest": "713bb551cf16a5e89bcb68858825f1e7b26e8a34"
     }
   ],
   "releases": [
@@ -39,7 +39,7 @@
       "owner": "jellyfin",
       "repo": "jellyfin-web",
       "latest": "v10.10.7",
-      "latestPre": "v10.11.0-rc6",
+      "latestPre": "v10.11.0-rc7",
       "matrix": true,
       "default": true
     }
