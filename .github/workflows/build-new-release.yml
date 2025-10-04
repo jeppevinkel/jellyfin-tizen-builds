@@ -168,6 +168,9 @@ jobs:
           if ${{ matrix.true_hd == true }}; then
             sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
           fi
+
+          rm icon.png
+          mv ../iconnew.png icon.png
           
           if ${{ matrix.secondary == true }}; then
             sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
