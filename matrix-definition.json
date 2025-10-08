@@ -28,6 +28,19 @@
             ]
         },
         {
+            "name": "OblongIcon+secondary", 
+            "extra_values": [
+                {
+                    "key": "oblong_icon",
+                    "value": true
+                },
+                {
+                    "key": "secondary",
+                    "value": true
+                }
+            ]
+        },
+        {
             "name": "GrayFix", 
             "extra_values": [
                 {
