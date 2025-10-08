@@ -31,13 +31,9 @@
             "name": "OblongIcon+secondary", 
             "extra_values": [
                 {
-                    "key": "oblong_icon",
+                    "key": "oblong_icon_secondary",
                     "value": true
                 },
-                {
-                    "key": "secondary",
-                    "value": true
-                }
             ]
         },
         {
