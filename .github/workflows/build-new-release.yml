@@ -172,7 +172,7 @@ jobs:
           rm icon.png
           mv ../iconnew.png icon.png
           
-          if ${{ matrix.secondary == true }}; then
+          if [ "${{ matrix.secondary }}" == "true" ] || [ "${{ matrix.oblong_icon_secondary }}" == "true" ]; then
             sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
             sed -i 's/<name>Jellyfin<\/name>/<name>Jellyfin 2<\/name>/g' config.xml
             rm icon.png
@@ -181,6 +181,11 @@ jobs:
           if ${{ matrix.oblong_icon == true }}; then
             rm icon.png
             mv ../iconoblong.png icon.png
+          fi
+
+          if ${{ matrix.oblong_icon_secondary == true }}; then
+            rm icon.png
+            mv ../iconoblong2.png icon.png
           fi
           
           if ${{ matrix.legacy == true }}; then
