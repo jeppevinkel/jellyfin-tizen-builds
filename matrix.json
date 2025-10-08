@@ -123,37 +123,32 @@
       "tag": "release-10.9.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.9.z-OblongIcon+secondary",
-      "oblong_icon": true,
-      "secondary": true
+      "oblong_icon_secondary": true
     },
     {
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-OblongIcon+secondary",
-      "oblong_icon": true,
-      "secondary": true
+      "oblong_icon_secondary": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-OblongIcon+secondary",
       "modern": true,
-      "oblong_icon": true,
-      "secondary": true
+      "oblong_icon_secondary": true
     },
     {
       "tag": "v10.10.7",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-OblongIcon+secondary",
-      "oblong_icon": true,
-      "secondary": true
+      "oblong_icon_secondary": true
     },
     {
       "tag": "v10.11.0-rc8",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-OblongIcon+secondary",
-      "oblong_icon": true,
-      "secondary": true
+      "oblong_icon_secondary": true
     },
     {
       "tag": "release-10.9.z",
