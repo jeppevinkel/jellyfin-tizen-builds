@@ -213,7 +213,7 @@ jobs:
           expect ./package.exp
           if ${{ matrix.artifact_name != 'Jellyfin' }}; then
 
-            if ${{ matrix.secondary == true }}; then
+            if [ "${{ matrix.secondary }}" == "true" ] || [ "${{ matrix.oblong_icon_secondary }}" == "true" ]; then
               mv "./jellyfin-tizen/release/Jellyfin 2.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
             else
               mv "./jellyfin-tizen/release/Jellyfin.wgt" "./jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt"
