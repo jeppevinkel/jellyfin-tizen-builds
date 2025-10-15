@@ -125,10 +125,10 @@ jobs:
       - name: Clone jellyfin-tizen
         uses: actions/checkout@v4
         with:
-          repository: 'jellyfin/jellyfin-tizen'
+          repository: ${{ matrix.smart_hub == true && 'morpheus133/jellyfin-tizen' || 'jellyfin/jellyfin-tizen' }}
           path: 'jellyfin-tizen'
-          ref: ${{ matrix.legacy == true && '8ebbd10643c10033223d6bf1d7fd7d59fba28fe1' || 'master' }}
-          
+          ref: ${{ matrix.smart_hub == true && 'smart-hub-preview-ok' || 'master' }}
+
       - name: Clone jellyfin-web
         uses: actions/checkout@v4
         with:
