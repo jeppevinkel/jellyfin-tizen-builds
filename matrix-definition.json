@@ -35,6 +35,15 @@
                     "value": true
                 }
             ]
+        },
+                {
+            "name": "SmartHub",
+            "extra_values": [
+                {
+                    "key": "smart_hub",
+                    "value": true
+                }
+            ]
         }
     ]
   }
