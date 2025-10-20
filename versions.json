@@ -23,7 +23,7 @@
       "name": "10.11.z",
       "matrix": true,
       "modern": true,
-      "latest": "fa7831bd1fd72e61b3133d2234832201d6dc803e"
+      "latest": ""
     },
     {
       "owner": "jellyfin",
