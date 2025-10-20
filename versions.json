@@ -42,6 +42,7 @@
       "latest": "v10.11.0",
       "latestPre": "v10.11.0",
       "matrix": true,
+      "modern": true,
       "default": true
     }
   ]
