@@ -3,7 +3,8 @@
     {
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-10.10.z"
+      "artifact_name": "Jellyfin-10.10.z",
+      "legacy": true
     },
     {
       "tag": "release-10.11.z",
@@ -29,6 +30,7 @@
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-TrueHD",
+      "legacy": true,
       "true_hd": true
     },
     {
@@ -59,6 +61,7 @@
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-secondary",
+      "legacy": true,
       "secondary": true
     },
     {
@@ -89,6 +92,7 @@
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-OblongIcon",
+      "legacy": true,
       "oblong_icon": true
     },
     {
@@ -119,6 +123,7 @@
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-GrayFix",
+      "legacy": true,
       "gray_fix": true
     },
     {
@@ -149,6 +154,7 @@
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-SmartHub",
+      "legacy": true,
       "smart_hub": true
     },
     {
