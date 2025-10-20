@@ -87,6 +87,10 @@ $versions.commits | Where-Object { $_.matrix -eq $true } | ForEach-Object {
         $matrixTask | Add-Member -NotePropertyName "modern" -NotePropertyValue $true
     }
 
+    if ($commit.legacy -eq $true) {
+        $matrixTask | Add-Member -NotePropertyName "legacy" -NotePropertyValue $true
+    }
+
     $matrix.include += $matrixTask
 }
 
@@ -137,6 +141,10 @@ $matrixDefinition.variations | ForEach-Object {
 
         if ($commit.modern -eq $true) {
             $matrixTask | Add-Member -NotePropertyName "modern" -NotePropertyValue $true
+        }
+
+        if ($commit.legacy -eq $true) {
+            $matrixTask | Add-Member -NotePropertyName "legacy" -NotePropertyValue $true
         }
 
         $variation.extra_values | ForEach-Object {
