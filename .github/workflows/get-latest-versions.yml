@@ -21,8 +21,8 @@ jobs:
       
       - name: Commit Updated Files
         run: |
-          git config --global user.name 'jeppevinkel'
-          git config --global user.email 'jeppevinkel@users.noreply.github.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add versions.json
           git add matrix.json
           git commit -m "Automated Version Update" || echo "No changes to commit"
