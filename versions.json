@@ -14,6 +14,7 @@
       "ref": "release-10.10.z",
       "name": "10.10.z",
       "matrix": true,
+      "legacy": true,
       "latest": "f4b8aa0ed4c5b571a3a6cc3bb027bb8ecebe5b68"
     },
     {
@@ -22,7 +23,6 @@
       "ref": "release-10.11.z",
       "name": "10.11.z",
       "matrix": true,
-      "modern": true,
       "latest": "fa7831bd1fd72e61b3133d2234832201d6dc803e"
     },
     {
@@ -31,7 +31,6 @@
       "ref": "master",
       "name": "master",
       "matrix": true,
-      "modern": true,
       "latest": "24477e8025e99a432c8775a71626dc79e7c3d926"
     }
   ],
@@ -42,7 +41,6 @@
       "latest": "v10.11.0",
       "latestPre": "v10.11.0",
       "matrix": true,
-      "modern": true,
       "default": true
     }
   ]

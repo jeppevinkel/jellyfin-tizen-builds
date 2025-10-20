@@ -140,17 +140,17 @@ jobs:
         run: |
           cd jellyfin-web
 
-          if ${{ matrix.modern == true }} || ${{ contains(matrix.artifact_name, 'Jellyfin-prerelease') }}; then
-            sed -i -z "s/{user.Name}\n                        <\/h2>/{user.Name}\n                        <\/h2><h4 style={{paddingLeft:'0.25em'}}>${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/apps/stable/routes/user/settings/index.tsx
-          else
+          if ${{ matrix.legacy == true }}; then
             sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
+          else
+            sed -i -z "s/{user.Name}\n                        <\/h2>/{user.Name}\n                        <\/h2><h4 style={{paddingLeft:'0.25em'}}>${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/apps/stable/routes/user/settings/index.tsx
           fi
 
           if ${{ matrix.gray_fix == true }}; then
             sed -i 's/background: #000 !important;/background: transparent !important;/g' src/plugins/htmlVideoPlayer/style.scss
           fi
           
-          if ${{ matrix.legacy == true }}; then
+          if ${{ matrix.legacy == true }} && false; then
             SKIP_PREPARE=1 npm ci --no-audit
             npm run build:production
           else
@@ -180,7 +180,7 @@ jobs:
             mv ../iconoblong.png icon.png
           fi
           
-          if ${{ matrix.legacy == true }}; then
+          if ${{ matrix.legacy == true }} && false; then
             DISCARD_UNUSED_FONTS=1 JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
           else
             JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
