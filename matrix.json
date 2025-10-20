@@ -8,14 +8,12 @@
     {
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-10.11.z",
-      "modern": true
+      "artifact_name": "Jellyfin-10.11.z"
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-master",
-      "modern": true
+      "artifact_name": "Jellyfin-master"
     },
     {
       "tag": "v10.11.0",
@@ -37,14 +35,12 @@
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.11.z-TrueHD",
-      "modern": true,
       "true_hd": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-TrueHD",
-      "modern": true,
       "true_hd": true
     },
     {
@@ -69,14 +65,12 @@
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.11.z-secondary",
-      "modern": true,
       "secondary": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-secondary",
-      "modern": true,
       "secondary": true
     },
     {
@@ -101,14 +95,12 @@
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.11.z-OblongIcon",
-      "modern": true,
       "oblong_icon": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-OblongIcon",
-      "modern": true,
       "oblong_icon": true
     },
     {
@@ -133,14 +125,12 @@
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.11.z-GrayFix",
-      "modern": true,
       "gray_fix": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-GrayFix",
-      "modern": true,
       "gray_fix": true
     },
     {
@@ -165,14 +155,12 @@
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.11.z-SmartHub",
-      "modern": true,
       "smart_hub": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-SmartHub",
-      "modern": true,
       "smart_hub": true
     },
     {
