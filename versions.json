@@ -11,16 +11,16 @@
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "ref": "release-10.9.z",
-      "name": "10.9.z",
+      "ref": "release-10.10.z",
+      "name": "10.10.z",
       "matrix": true,
-      "latest": "6cae5c2646f39f0f63afb204fd12cedf398b80ad"
+      "latest": "f4b8aa0ed4c5b571a3a6cc3bb027bb8ecebe5b68"
     },
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "ref": "release-10.10.z",
-      "name": "10.10.z",
+      "ref": "release-10.11.z",
+      "name": "10.11.z",
       "matrix": true,
       "latest": "f4b8aa0ed4c5b571a3a6cc3bb027bb8ecebe5b68"
     },
