@@ -7,8 +7,8 @@ For real-time-ish communications, you can join my [Discord server](https://disco
 | File name    | Description                                                                                                               |
 |--------------|---------------------------------------------------------------------------------------------------------------------------|
 | Jellyfin.wgt | Built with the latest stable release of jellyfin-web                                                                      |
+| 10.11.z      | Built with the bleeding edge of the branch for the 10.11.z releases                                                       |
 | 10.10.z      | Built with the bleeding edge of the branch for the 10.10.z releases                                                       |
-| 10.9.z       | Built with the bleeding edge of the branch for the 10.9.z releases                                                        |
 | master       | Built with the latest potentially unstable changes to jellyfin-web code (this will always be the newest possible version) |
 | TrueHD       | TrueHD support is enabled (whether it works or not might depend on TV model)                                              |
 | secondary    | Built with the latest stable release of jellyfin-web and a different app ID to allow having a second account signed in    |
