@@ -17,12 +17,12 @@
       "artifact_name": "Jellyfin-master"
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin"
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease"
     },
@@ -46,13 +46,13 @@
       "true_hd": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-TrueHD",
       "true_hd": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-TrueHD",
       "true_hd": true
@@ -77,13 +77,13 @@
       "secondary": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-secondary",
       "secondary": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-secondary",
       "secondary": true
@@ -108,13 +108,13 @@
       "oblong_icon": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-OblongIcon",
       "oblong_icon": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-OblongIcon",
       "oblong_icon": true
@@ -139,13 +139,13 @@
       "gray_fix": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-GrayFix",
       "gray_fix": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-GrayFix",
       "gray_fix": true
@@ -170,13 +170,13 @@
       "smart_hub": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-SmartHub",
       "smart_hub": true
     },
     {
-      "tag": "v10.11.0",
+      "tag": "v10.11.1",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-SmartHub",
       "smart_hub": true
