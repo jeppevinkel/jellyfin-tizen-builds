@@ -31,15 +31,15 @@
       "name": "master",
       "matrix": true,
       "modern": true,
-      "latest": "2687b3daf1258c729be688f64c026240e2266b03"
+      "latest": "530df76316f4e51a47b24a85150cbd34a61b8637"
     }
   ],
   "releases": [
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "latest": "v10.11.1",
-      "latestPre": "v10.11.1",
+      "latest": "v10.11.2",
+      "latestPre": "v10.11.2",
       "matrix": true,
       "default": true
     }
