@@ -23,7 +23,7 @@
       "ref": "release-10.11.z",
       "name": "10.11.z",
       "matrix": true,
-      "latest": "39f971ffa4fe0f2b76d3b0dc0619b957c46483a1"
+      "latest": "3c6a5160a6670c25c4576fefdd6a817d7aaded00"
     },
     {
       "owner": "jellyfin",
