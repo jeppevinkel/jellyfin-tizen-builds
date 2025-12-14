@@ -19,8 +19,8 @@ For real-time-ish communications, you can join my [Discord server](https://disco
 *Disclaimer: I don't have many success stories with TVs older than 2018, but a few people in my Discord server have reported it working for their 2015 and 2016 TVs with the `10.8.z` version. This version is not included in new releases, but can be found [here](https://github.com/jeppevinkel/jellyfin-tizen-builds/releases/tag/2024-10-27-1821)*
 
 ## Installation
-For a GUI installer that automates most of the process, check out this program mady by PatrickSt1991 [PatrickSt1991/Samsung-Jellyfin-Installer](https://github.com/PatrickSt1991/Samsung-Jellyfin-Installer).  
-For a one step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).  
+For a GUI installer that automates most of the process, check out this program made by PatrickSt1991 [PatrickSt1991/Samsung-Jellyfin-Installer](https://github.com/PatrickSt1991/Samsung-Jellyfin-Installer).  
+For a one-step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).  
 *I have no affiliation with these installers and I can't provide support related to them. Both of the installers directly use the builds I provide here.*
 
 ### Prerequisites
