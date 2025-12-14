@@ -221,7 +221,7 @@ jobs:
         run: cat ./tizen-studio-data/cli/logs/cli.log
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.artifact_name }}
           path: jellyfin-tizen/release/${{ matrix.artifact_name }}.wgt
