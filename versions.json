@@ -23,7 +23,7 @@
       "ref": "release-10.11.z",
       "name": "10.11.z",
       "matrix": true,
-      "latest": "e2ae48d8e5f6091135fb35555c740fc5bd682e54"
+      "latest": "ae58599bd0e97f2bccb723bb70f0920d50ad361b"
     },
     {
       "owner": "jellyfin",
@@ -38,8 +38,8 @@
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "latest": "v10.11.4",
-      "latestPre": "v10.11.4",
+      "latest": "v10.11.5",
+      "latestPre": "v10.11.5",
       "matrix": true,
       "default": true
     }
