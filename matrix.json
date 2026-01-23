@@ -29,37 +29,6 @@
     {
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-10.10.z-TrueHD",
-      "legacy": true,
-      "true_hd": true
-    },
-    {
-      "tag": "release-10.11.z",
-      "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-10.11.z-TrueHD",
-      "true_hd": true
-    },
-    {
-      "tag": "master",
-      "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-master-TrueHD",
-      "true_hd": true
-    },
-    {
-      "tag": "v10.11.6",
-      "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-TrueHD",
-      "true_hd": true
-    },
-    {
-      "tag": "v10.11.6",
-      "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-prerelease-TrueHD",
-      "true_hd": true
-    },
-    {
-      "tag": "release-10.10.z",
-      "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-10.10.z-secondary",
       "legacy": true,
       "secondary": true
