@@ -168,10 +168,6 @@ jobs:
           cd jellyfin-tizen
           
           sed -i "s/appVersion: tizen.application.getCurrentApplication().appInfo.version/appVersion: tizen.application.getCurrentApplication().appInfo.version + \" compiled ${{ needs.run-info.outputs.date_pretty_sed }} with ${{ matrix.artifact_name }}\"/g" tizen.js
-
-          if ${{ matrix.true_hd == true }}; then
-            sed -i 's/enableSsaRender: true/enableSsaRender: true, supportsTrueHd: true/g' tizen.js
-          fi
           
           if ${{ matrix.secondary == true }}; then
             sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
