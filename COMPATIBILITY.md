@@ -4,7 +4,7 @@
 
 | TV Model | Year | Jellyfin-web Version | TrueHD Support | SmartHub Support | Notes |
 |----------|------|---------------------|----------------|------------------|-------|
-| RU7405 | 2019 | >= 10.8.z | true | unknown | No known issues |
+| RU7405 | 2019 | >= 10.8.z | true | true | No known issues |
 
 ## Unsupported Models
 
@@ -26,3 +26,4 @@
   - `true` - Confirmed support
   - `false` - Confirmed no support
   - `unknown` - Not tested/verified
+
