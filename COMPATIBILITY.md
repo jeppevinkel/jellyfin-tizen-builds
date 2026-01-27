@@ -5,6 +5,7 @@
 | TV Model | Year | Jellyfin-web Version | TrueHD Support | SmartHub Support | Notes           |
 | -------- | ---- | -------------------- | -------------- | ---------------- | --------------- |
 | RU7405   | 2019 | >= 10.8.z            | true           | true             | No known issues |
+| S95C     | 2024 | >= 10.11.z           | true           | false            | SmartHub Preview doesn't seem to work in Tizen 9 |
 
 ## Unsupported Models
 
@@ -26,3 +27,4 @@
   - `true` - Confirmed support
   - `false` - Confirmed no support
   - `unknown` - Not tested/verified
+
