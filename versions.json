@@ -15,7 +15,7 @@
       "name": "10.10.z",
       "matrix": true,
       "legacy": true,
-      "latest": "f4b8aa0ed4c5b571a3a6cc3bb027bb8ecebe5b68"
+      "latest": "2efac6f67a947ce645d014249677898dbe458fac"
     },
     {
       "owner": "jellyfin",
@@ -23,7 +23,7 @@
       "ref": "release-10.11.z",
       "name": "10.11.z",
       "matrix": true,
-      "latest": "6f24a18c31ded7f59df8bfd823b5555ec04a0417"
+      "latest": "b0c3c33e6e0832f81f4d93137b377a0bb17f8284"
     },
     {
       "owner": "jellyfin",
