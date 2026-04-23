@@ -100,7 +100,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6
         with:
-          node-version: 'v23.11.1'
+          node-version: 'v24.15.0'
           
       - name: Install Needed packages
         run: sudo apt install expect
