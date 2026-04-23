@@ -153,7 +153,7 @@
     {
       "tag": "release-10.10.z",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-10.10.z-OA",
+      "artifact_name": "Jellyfin-10.10.z-OSA",
       "legacy": true,
       "oblong_icon": true,
       "avplay": true
@@ -161,28 +161,28 @@
     {
       "tag": "release-10.11.z",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-10.11.z-OA",
+      "artifact_name": "Jellyfin-10.11.z-OSA",
       "oblong_icon": true,
       "avplay": true
     },
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-master-OA",
+      "artifact_name": "Jellyfin-master-OSA",
       "oblong_icon": true,
       "avplay": true
     },
     {
       "tag": "v10.11.8",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-OA",
+      "artifact_name": "Jellyfin-OSA",
       "oblong_icon": true,
       "avplay": true
     },
     {
       "tag": "v10.11.8",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-prerelease-OA",
+      "artifact_name": "Jellyfin-prerelease-OSA",
       "oblong_icon": true,
       "avplay": true
     }
