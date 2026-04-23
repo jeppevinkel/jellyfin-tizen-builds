@@ -131,7 +131,7 @@ jobs:
         with:
           repository: ${{ matrix.smart_hub == true && 'morpheus133/jellyfin-tizen' || matrix.avplay == true && 'jeppevinkel/jellyfin-tizen' || 'jellyfin/jellyfin-tizen' }}
           path: 'jellyfin-tizen'
-          ref: ${{ matrix.smart_hub == true && 'smart-hub-preview-ok' || matrix.avplay == true && 'feature/avplay' || 'master' }}
+          ref: ${{ matrix.smart_hub == true && 'smart-hub-preview-ok' || matrix.avplay == true && 'feature/combine-avplay-smart-hub' || 'master' }}
 
       - name: Clone jellyfin-web
         uses: actions/checkout@v6
@@ -172,6 +172,7 @@ jobs:
           if ${{ matrix.secondary == true }}; then
             sed -i 's/AprZAARz4r/JepZAARz4r/g' config.xml
             sed -i 's/<name>Jellyfin<\/name>/<name>Jellyfin 2<\/name>/g' config.xml
+            sed -i 's/<tizen:name>jellyfin_service<\/tizen:name>/<tizen:name>jellyfin2_service<\/tizen:name>/g' config.xml
             rm icon.png
             mv ../icon2.png icon.png
           fi
