@@ -14,7 +14,8 @@
     {
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin-master"
+      "artifact_name": "Jellyfin-master",
+      "node24": true
     },
     {
       "tag": "v10.11.8",
@@ -43,6 +44,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-secondary",
+      "node24": true,
       "secondary": true
     },
     {
@@ -74,6 +76,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-OblongIcon",
+      "node24": true,
       "oblong_icon": true
     },
     {
@@ -105,6 +108,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-GrayFix",
+      "node24": true,
       "gray_fix": true
     },
     {
@@ -136,6 +140,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-SmartHub",
+      "node24": true,
       "smart_hub": true
     },
     {
@@ -169,6 +174,7 @@
       "tag": "master",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-master-OSA",
+      "node24": true,
       "oblong_icon": true,
       "avplay": true
     },
