@@ -149,6 +149,42 @@
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-prerelease-SmartHub",
       "smart_hub": true
+    },
+    {
+      "tag": "release-10.10.z",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-10.10.z-OA",
+      "legacy": true,
+      "oblong_icon": true,
+      "avplay": true
+    },
+    {
+      "tag": "release-10.11.z",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-10.11.z-OA",
+      "oblong_icon": true,
+      "avplay": true
+    },
+    {
+      "tag": "master",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-master-OA",
+      "oblong_icon": true,
+      "avplay": true
+    },
+    {
+      "tag": "v10.11.8",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-OA",
+      "oblong_icon": true,
+      "avplay": true
+    },
+    {
+      "tag": "v10.11.8",
+      "repository": "jellyfin/jellyfin-web",
+      "artifact_name": "Jellyfin-prerelease-OA",
+      "oblong_icon": true,
+      "avplay": true
     }
   ]
 }
