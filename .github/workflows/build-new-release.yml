@@ -129,9 +129,9 @@ jobs:
       - name: Clone jellyfin-tizen
         uses: actions/checkout@v6
         with:
-          repository: ${{ matrix.smart_hub == true && 'morpheus133/jellyfin-tizen' || 'jellyfin/jellyfin-tizen' }}
+          repository: ${{ matrix.smart_hub == true && 'morpheus133/jellyfin-tizen' || matrix.avplay == true && 'jeppevinkel/jellyfin-tizen' || 'jellyfin/jellyfin-tizen' }}
           path: 'jellyfin-tizen'
-          ref: ${{ matrix.smart_hub == true && 'smart-hub-preview-ok' || 'master' }}
+          ref: ${{ matrix.smart_hub == true && 'smart-hub-preview-ok' || matrix.avplay == true && 'feature/avplay' || 'master' }}
 
       - name: Clone jellyfin-web
         uses: actions/checkout@v6

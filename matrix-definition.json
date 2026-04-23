@@ -35,6 +35,19 @@
                     "value": true
                 }
             ]
+        },
+                {
+            "name": "OA",
+            "extra_values": [
+                {
+                    "key": "oblong_icon",
+                    "value": true
+                },
+                {
+                    "key": "avplay",
+                    "value": true
+                }
+            ]
         }
     ]
   }
