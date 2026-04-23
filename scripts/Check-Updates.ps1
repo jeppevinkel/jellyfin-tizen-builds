@@ -97,6 +97,10 @@ $versions.commits | Where-Object { $_.matrix -eq $true } | ForEach-Object {
         $matrixTask | Add-Member -NotePropertyName "legacy" -NotePropertyValue $true
     }
 
+    if ($commit.node24 -eq $true) {
+        $matrixTask | Add-Member -NotePropertyName "node24" -NotePropertyValue $true
+    }
+
     $matrix.include += $matrixTask
 }
 
@@ -151,6 +155,10 @@ $matrixDefinition.variations | ForEach-Object {
 
         if ($commit.legacy -eq $true) {
             $matrixTask | Add-Member -NotePropertyName "legacy" -NotePropertyValue $true
+        }
+
+        if ($commit.node24 -eq $true) {
+            $matrixTask | Add-Member -NotePropertyName "node24" -NotePropertyValue $true
         }
 
         $variation.extra_values | ForEach-Object {
