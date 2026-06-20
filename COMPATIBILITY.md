@@ -7,6 +7,7 @@
 | RU710    | 2019 | >= 10.11.z           | unknown        | unknown          | Everything seems to work as expected. The tested model was UE55RU7105KXXC |
 | RU7405   | 2019 | >= 10.8.z            | true           | true             | No known issues |
 | S95C     | 2024 | >= 10.11.z           | true           | false            | SmartHub Preview doesn't seem to work in Tizen 9 |
+| QA50L    | 2024 | >= 10.11.z           | unknown        | false            | SmartHub Preview doesn't seem to work in Tizen 6.5. Tested model was QA50LS03BAWXXY |
 
 ## Unsupported Models
 
