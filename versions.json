@@ -32,7 +32,7 @@
       "name": "master",
       "matrix": true,
       "node24": true,
-      "latest": "a736af4e98f7815a223197fb114a3e49ff6c5793"
+      "latest": "24074b9dcb922b8b9012b1fc56895f1168903775"
     }
   ],
   "releases": [
@@ -40,7 +40,7 @@
       "owner": "jellyfin",
       "repo": "jellyfin-web",
       "latest": "v10.11.11",
-      "latestPre": "v10.11.11",
+      "latestPre": "v12.0-rc2",
       "matrix": true,
       "default": true
     }
