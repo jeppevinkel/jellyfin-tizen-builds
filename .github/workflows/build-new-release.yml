@@ -145,12 +145,25 @@ jobs:
         run: |
           cd jellyfin-web
 
-          if ${{ matrix.legacy == true }}; then
+          _found=0
+
+          if [ -f "src/controllers/user/menu/index.html" ]; then
+            _found=1
             sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
-          elif ${{ matrix.node24 == true }}; then
+          fi
+
+          if [ -f "src/apps/legacy/routes/user/settings/index.tsx" ]; then
+            _found=1
             sed -i -z "s/{user.Name}\n                        <\/h2>/{user.Name}\n                        <\/h2><h4 style={{paddingLeft:'0.25em'}}>${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/apps/legacy/routes/user/settings/index.tsx
-          else
+          fi
+
+          if [ -f "src/apps/stable/routes/user/settings/index.tsx" ]; then
+            _found=1
             sed -i -z "s/{user.Name}\n                        <\/h2>/{user.Name}\n                        <\/h2><h4 style={{paddingLeft:'0.25em'}}>${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/apps/stable/routes/user/settings/index.tsx
+          fi
+
+          if [ "$_found" -eq 0 ]; then
+            echo "::warning::No target files found for version stamp, skipping."
           fi
 
           if ${{ matrix.gray_fix == true }}; then
