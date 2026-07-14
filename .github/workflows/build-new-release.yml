@@ -92,7 +92,8 @@ jobs:
 
 
     steps:
-      - run: env
+      - name: Print ALL matrix values (as JSON)
+        run: echo '${{ toJSON(matrix) }}'
       
       - name: 'Checkout'
         uses: actions/checkout@v7
