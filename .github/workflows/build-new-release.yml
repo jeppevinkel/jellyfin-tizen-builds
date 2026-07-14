@@ -101,7 +101,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v7
         with:
-          node-version: ${{ matrix.node24 == true && 'v24.18.0' || matrix.latestPre == true && 'v24.18.0' || 'v23.11.1' }}
+          node-version: ${{ matrix.node24 == true && 'v24.18.0' || 'v23.11.1' }}
           
       - name: Install Needed packages
         run: sudo apt install expect
@@ -147,7 +147,7 @@ jobs:
 
           if ${{ matrix.legacy == true }}; then
             sed -i "s/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2>/<h2 class=\"sectionTitle headerUsername\" style=\"padding-left:.25em;\"><\/h2><h4 style=\"padding-left:.25em;\">${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/controllers/user/menu/index.html
-          elif ${{ matrix.node24 == true || matrix.latestPre == true }}; then
+          elif ${{ matrix.node24 == true }}; then
             sed -i -z "s/{user.Name}\n                        <\/h2>/{user.Name}\n                        <\/h2><h4 style={{paddingLeft:'0.25em'}}>${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/apps/legacy/routes/user/settings/index.tsx
           else
             sed -i -z "s/{user.Name}\n                        <\/h2>/{user.Name}\n                        <\/h2><h4 style={{paddingLeft:'0.25em'}}>${{ matrix.artifact_name }} compiled ${{ needs.run-info.outputs.date }}<\/h4>/g" src/apps/stable/routes/user/settings/index.tsx
