@@ -38,7 +38,7 @@ This list is intended to be community maintained, and anyone is free to create n
 
 ## Installation
 
-For a GUI installer that automates most of the process, check out this program made by PatrickSt1991 [PatrickSt1991/Samsung-Jellyfin-Installer](https://github.com/PatrickSt1991/Samsung-Jellyfin-Installer).  
+For a GUI installer that automates most of the process, check out this program made by PatrickSt1991 [Apps2Samsung/Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung).  
 For a one-step install process using Docker, check out this guide made by Georift [Georift/install-jellyfin-tizen](https://github.com/Georift/install-jellyfin-tizen).  
 *I have no affiliation with these installers and I can't provide support related to them. Both of the installers directly use the builds I provide here.*
 
