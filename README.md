@@ -4,6 +4,16 @@ The purpose of this repository is to automatically build the most up-to-date ver
 
 For real-time-ish communications, you can join my [Discord server](https://discord.gg/DGnRQUJ).
 
+## Related Projects
+This repository only handles the automated building and packaging of the Jellyfin Tizen app. The following upstream projects are responsible for the actual implementation:
+
+| Project | Description |
+|---------|-------------|
+| [jellyfin/jellyfin-tizen](https://github.com/jellyfin/jellyfin-tizen) | The Samsung Tizen wrapper app that this repository builds |
+| [jellyfin/jellyfin-web](https://github.com/jellyfin/jellyfin-web) | The Jellyfin web client bundled inside the app |
+
+> **Note:** If you experience runtime issues with the app itself (e.g. playback problems, UI bugs, missing features), please check and report those issues in the relevant upstream repository above rather than here. This repository only produces the build artifacts and is not the right place to address such issues.
+
 ## Versions
 
 | File name    | Description                                                                                                                       |
@@ -64,6 +74,14 @@ typically located in (C:\tizen-studio\tools\ide\bin)
 
 ## Common issues
 
+### Runtime issues with the app (playback, UI, features)?
+This repository is only responsible for building and packaging the app, it does not control the app's behaviour or the web client (with exception of features specifically mentioned in specialty builds).
+
+- For issues with the **Tizen wrapper** (crashes, app-level bugs, Tizen-specific behaviour): report to [jellyfin/jellyfin-tizen](https://github.com/jellyfin/jellyfin-tizen/issues)
+- For issues with the **web client** (UI bugs, playback issues, missing features): report to [jellyfin/jellyfin-web](https://github.com/jellyfin/jellyfin-web/issues)
+
+Please check the existing issues in those repositories before opening a new one, as your problem may already be known and tracked there.
+
 ### Install failing due to wrong certificate?
 
 This should only happen if you already have a version installed using a different build certificate.  
@@ -73,7 +91,7 @@ Removing it from the app bar is not the same as removing it from the device, you
 
 ### Where do I find `sdb`?
 
-If you installed Tizen Studio with CLI correctly, then you should find the `sdb` tool: 
+If you installed Tizen Studio with CLI correctly, then you should find the `sdb` tool:
 
 On Windows
 
