@@ -32,7 +32,7 @@
       "name": "master",
       "matrix": true,
       "node24": true,
-      "latest": "7ed26d64726cf48bc65e82f82a2657a735a6bdd3"
+      "latest": "5f400d96ccd15d84d87d656a0690fc2c8a03c306"
     }
   ],
   "releases": [
