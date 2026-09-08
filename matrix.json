@@ -20,7 +20,8 @@
     {
       "tag": "v12.0",
       "repository": "jellyfin/jellyfin-web",
-      "artifact_name": "Jellyfin"
+      "artifact_name": "Jellyfin",
+      "node24": true
     },
     {
       "tag": "v12.0",
