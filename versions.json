@@ -42,7 +42,8 @@
       "latest": "v12.0",
       "latestPre": "v12.0",
       "matrix": true,
-      "default": true
+      "default": true,
+      "node24": true
     }
   ]
 }
