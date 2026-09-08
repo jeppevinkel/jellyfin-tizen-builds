@@ -53,6 +53,7 @@
       "tag": "v12.0",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-secondary",
+      "node24": true,
       "secondary": true
     },
     {
@@ -86,6 +87,7 @@
       "tag": "v12.0",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-OblongIcon",
+      "node24": true,
       "oblong_icon": true
     },
     {
@@ -119,6 +121,7 @@
       "tag": "v12.0",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-GrayFix",
+      "node24": true,
       "gray_fix": true
     },
     {
@@ -152,6 +155,7 @@
       "tag": "v12.0",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-SmartHub",
+      "node24": true,
       "smart_hub": true
     },
     {
@@ -188,6 +192,7 @@
       "tag": "v12.0",
       "repository": "jellyfin/jellyfin-web",
       "artifact_name": "Jellyfin-OSA",
+      "node24": true,
       "oblong_icon": true,
       "avplay": true
     },
