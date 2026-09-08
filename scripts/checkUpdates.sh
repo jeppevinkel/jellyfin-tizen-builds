@@ -55,12 +55,12 @@ matrix_json=$(jq -n \
   + [ $matrixDef.variations[] as $v |
       $versions.releases[] | select(.matrix == true) |
       if .default == true then
-        ( { tag: .latest,    repository: "jellyfin/jellyfin-web", artifact_name: ("Jellyfin-" + $v.name) }
+        ( { tag: .latest,    repository: "jellyfin/jellyfin-web", artifact_name: ("Jellyfin-" + $v.name), node24: true }
           + ($v.extra_values | extra_vals_obj),
           { tag: .latestPre, repository: "jellyfin/jellyfin-web", artifact_name: ("Jellyfin-prerelease-" + $v.name), node24: true }
           + ($v.extra_values | extra_vals_obj) )
       else
-        ( { tag: .latest,    repository: "jellyfin/jellyfin-web", artifact_name: ("Jellyfin-" + .latest    + "-" + $v.name) }
+        ( { tag: .latest,    repository: "jellyfin/jellyfin-web", artifact_name: ("Jellyfin-" + .latest    + "-" + $v.name), node24: true }
           + ($v.extra_values | extra_vals_obj),
           { tag: .latestPre, repository: "jellyfin/jellyfin-web", artifact_name: ("Jellyfin-" + .latestPre + "-" + $v.name), node24: true }
           + ($v.extra_values | extra_vals_obj) )
