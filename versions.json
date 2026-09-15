@@ -32,15 +32,15 @@
       "name": "master",
       "matrix": true,
       "node24": true,
-      "latest": "5c898533a19d3cd360e41b83e637a6f86b533bf1"
+      "latest": "c553419f485c4de038368c22be6e1f4743879d47"
     }
   ],
   "releases": [
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "latest": "v12.0",
-      "latestPre": "v12.0",
+      "latest": "v12.1",
+      "latestPre": "v12.1",
       "matrix": true,
       "default": true
     }
