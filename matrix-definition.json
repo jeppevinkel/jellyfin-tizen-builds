@@ -1,53 +1,75 @@
 {
-    "variations": [
+  "variations": [
+    {
+      "name": "secondary",
+      "extra_values": [
         {
-            "name": "secondary", 
-            "extra_values": [
-                {
-                    "key": "secondary",
-                    "value": true
-                }
-            ]
-        },
-        {
-            "name": "OblongIcon", 
-            "extra_values": [
-                {
-                    "key": "oblong_icon",
-                    "value": true
-                }
-            ]
-        },
-        {
-            "name": "GrayFix", 
-            "extra_values": [
-                {
-                    "key": "gray_fix",
-                    "value": true
-                }
-            ]
-        },
-                {
-            "name": "SmartHub",
-            "extra_values": [
-                {
-                    "key": "smart_hub",
-                    "value": true
-                }
-            ]
-        },
-                {
-            "name": "OSA",
-            "extra_values": [
-                {
-                    "key": "oblong_icon",
-                    "value": true
-                },
-                {
-                    "key": "avplay",
-                    "value": true
-                }
-            ]
+          "key": "secondary",
+          "value": true
         }
-    ]
-  }
+      ]
+    },
+    {
+      "name": "OblongIcon",
+      "extra_values": [
+        {
+          "key": "oblong_icon",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "GrayFix",
+      "extra_values": [
+        {
+          "key": "gray_fix",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "SmartHub",
+      "extra_values": [
+        {
+          "key": "smart_hub",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "OSA",
+      "extra_values": [
+        {
+          "key": "oblong_icon",
+          "value": true
+        },
+        {
+          "key": "avplay",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "TrailerFix",
+      "extra_values": [
+        {
+          "key": "youtube_fix",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "secondary-TrailerFix",
+      "extra_values": [
+        {
+          "key": "secondary",
+          "value": true
+        },
+        {
+          "key": "youtube_fix",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

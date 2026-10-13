@@ -203,12 +203,17 @@ jobs:
             JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
           fi
 
+      - name: Apply YouTube trailer fix
+        if: matrix.youtube_fix == true
+        run: |
+          node ./patches/youtube-fix/apply.mjs ./jellyfin-tizen ${{ matrix.secondary == true && '8124' || '8123' }}
+
       - name: Build Package
         if: success() || steps.buildMaster.conclusion == 'success'
         run: |
           cd jellyfin-tizen
           ../tizen-studio/tools/ide/bin/tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
-          
+
       - name: Prepare for password prompt
         if: success() || steps.buildMaster.conclusion == 'success'
         run: |
