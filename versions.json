@@ -11,15 +11,6 @@
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "ref": "release-10.10.z",
-      "name": "10.10.z",
-      "matrix": true,
-      "legacy": true,
-      "latest": "2efac6f67a947ce645d014249677898dbe458fac"
-    },
-    {
-      "owner": "jellyfin",
-      "repo": "jellyfin-web",
       "ref": "release-10.11.z",
       "name": "10.11.z",
       "matrix": true,
@@ -28,19 +19,28 @@
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
+      "ref": "release-12.z",
+      "name": "12.z",
+      "matrix": true,
+      "node24": true,
+      "latest": "61b1f890365ad15138e943e694af723c1d47df2a"
+    },
+    {
+      "owner": "jellyfin",
+      "repo": "jellyfin-web",
       "ref": "master",
       "name": "master",
       "matrix": true,
       "node24": true,
-      "latest": "c9257f070dc2e84e8db3f14e59c00f3251653cc6"
+      "latest": "e74f66f101b1ab32f74a555e82658eb2728759ab"
     }
   ],
   "releases": [
     {
       "owner": "jellyfin",
       "repo": "jellyfin-web",
-      "latest": "v10.11.11",
-      "latestPre": "v12.0-rc2",
+      "latest": "v12.2",
+      "latestPre": "v12.2",
       "matrix": true,
       "default": true
     }
