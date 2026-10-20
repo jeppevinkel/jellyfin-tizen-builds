@@ -23,7 +23,7 @@
       "name": "12.z",
       "matrix": true,
       "node24": true,
-      "latest": "61b1f890365ad15138e943e694af723c1d47df2a"
+      "latest": "cab323b03431910592123a760bb18ad007d1e9c7"
     },
     {
       "owner": "jellyfin",
@@ -32,7 +32,7 @@
       "name": "master",
       "matrix": true,
       "node24": true,
-      "latest": "ee8efb417e5377ba444509a68ed22af33e45950b"
+      "latest": "d071252ef04c791310e52decfaf32073e0e90678"
     }
   ],
   "releases": [
